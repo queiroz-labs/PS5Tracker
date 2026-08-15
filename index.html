@@ -3,272 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PS5 Slim — Rastreador</title>
+<title>PS5 Slim — Tracker de Preços</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
 
 :root {
-  --bg:      #080810;
-  --surf:    #101018;
-  --card:    #16161f;
-  --brd:     #252535;
-  --blue:    #0066cc;
-  --accent:  #3399ff;
-  --green:   #00d48a;
-  --red:     #ff4466;
-  --yellow:  #ffcc44;
-  --text:    #dde0ee;
-  --muted:   #606080;
-  --r:       10px;
+  --bg:     #08080f;
+  --surf:   #0f0f18;
+  --card:   #14141f;
+  --brd:    #23232f;
+  --blue:   #0066cc;
+  --accent: #3b9bff;
+  --green:  #00d48a;
+  --red:    #ff4d67;
+  --yellow: #ffc63d;
+  --text:   #e6e8f2;
+  --muted:  #7a7f99;
+  --r:      12px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;min-height:100vh}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:15px;line-height:1.55;min-height:100vh;
+}
 
 /* HEADER */
 header{
-  background:var(--surf);border-bottom:1px solid var(--brd);
-  padding:0 28px;height:56px;display:flex;align-items:center;gap:14px;
+  background:rgba(8,8,15,.85);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--brd);
   position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;gap:12px;
+  padding:12px 20px;
 }
 .logo{
-  width:32px;height:32px;background:var(--blue);border-radius:50%;
+  width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(135deg,var(--blue),var(--accent));
   display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:12px;color:#fff;flex-shrink:0;
-  box-shadow:0 0 16px rgba(0,102,204,.45);
+  font-weight:800;font-size:12px;color:#fff;flex-shrink:0;
+  box-shadow:0 4px 18px rgba(0,102,204,.4);
 }
-header h1{font-size:16px;font-weight:600;letter-spacing:-.2px}
-header h1 span{color:var(--accent)}
+header h1{font-size:16px;font-weight:700;letter-spacing:-.3px;white-space:nowrap}
+header h1 span{color:var(--accent);font-weight:600}
 .header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
 #status-pill{
   font-family:'DM Mono',monospace;font-size:11px;
-  padding:3px 10px;border-radius:20px;
-  background:rgba(96,96,128,.2);color:var(--muted);
-  border:1px solid var(--brd);
+  padding:4px 11px;border-radius:20px;white-space:nowrap;
+  background:rgba(122,127,153,.14);color:var(--muted);border:1px solid var(--brd);
 }
-#status-pill.ok  {background:rgba(0,212,138,.1);color:var(--green);border-color:rgba(0,212,138,.3)}
-#status-pill.err {background:rgba(255,68,102,.1);color:var(--red);border-color:rgba(255,68,102,.3)}
-#btn-update{
-  background:var(--blue);color:#fff;border:none;border-radius:6px;
-  padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;
-  transition:background .2s,opacity .2s;
+#status-pill.ok  {background:rgba(0,212,138,.12);color:var(--green);border-color:rgba(0,212,138,.3)}
+#status-pill.err {background:rgba(255,77,103,.12);color:var(--red);border-color:rgba(255,77,103,.3)}
+.tag-cron{
+  font-size:11px;color:var(--muted);white-space:nowrap;
+  display:none;
 }
-#btn-update:hover{background:#0080ff}
-#btn-update:disabled{opacity:.5;cursor:not-allowed}
+@media(min-width:480px){.tag-cron{display:inline}}
 
 /* MAIN */
-main{max-width:980px;margin:0 auto;padding:28px 20px 60px;display:flex;flex-direction:column;gap:20px}
+main{max-width:820px;margin:0 auto;padding:22px 16px 64px;display:flex;flex-direction:column;gap:18px}
 
-/* STAT ROW */
-.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
-.stat{
-  background:var(--card);border:1px solid var(--brd);border-radius:var(--r);
-  padding:18px 20px;position:relative;overflow:hidden;
+/* HERO — menor preço */
+.hero{
+  background:linear-gradient(160deg,rgba(0,102,204,.16),rgba(20,20,31,.4)),var(--card);
+  border:1px solid var(--brd);border-radius:var(--r);
+  padding:22px 22px 18px;
 }
-.stat::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:var(--blue);opacity:0;transition:opacity .3s;
+.hero-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
+.hero-price{
+  font-family:'DM Mono',monospace;font-weight:500;
+  font-size:clamp(34px,9vw,52px);line-height:1.05;color:#fff;
 }
-.stat.s-green::after{background:var(--green);opacity:1}
-.stat.s-blue::after {background:var(--accent);opacity:1}
-.stat.s-yellow::after{background:var(--yellow);opacity:1}
-.s-label{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:7px}
-.s-val{font-family:'DM Mono',monospace;font-size:20px;font-weight:500}
-.s-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.hero-store{font-size:14px;font-weight:600;color:var(--accent);margin-top:8px}
+.hero-meta{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}
 
-/* REC BANNER */
+/* RECOMENDAÇÃO */
 #rec{
-  border-radius:var(--r);padding:18px 22px;display:flex;gap:14px;
-  border:1px solid var(--brd);background:var(--card);
+  border-radius:var(--r);padding:16px 18px;display:flex;gap:13px;
+  border:1px solid var(--brd);background:var(--card);align-items:flex-start;
 }
-#rec .icon{font-size:26px;flex-shrink:0}
-#rec .r-title{font-size:15px;font-weight:600;margin-bottom:3px}
+#rec .icon{font-size:24px;line-height:1.3;flex-shrink:0}
+#rec .r-title{font-size:14px;font-weight:700;margin-bottom:3px}
 #rec .r-body{font-size:13px;color:var(--muted);line-height:1.5}
-#rec.buy {border-color:rgba(0,212,138,.35);background:rgba(0,212,138,.05)}
-#rec.wait{border-color:rgba(255,204,68,.35);background:rgba(255,204,68,.05)}
-#rec.hold{border-color:rgba(255,68,102,.25);background:rgba(255,68,102,.04)}
+#rec.buy {border-color:rgba(0,212,138,.4);background:rgba(0,212,138,.06)}
+#rec.wait{border-color:rgba(255,198,61,.4);background:rgba(255,198,61,.06)}
+#rec.hold{border-color:rgba(255,77,103,.35);background:rgba(255,77,103,.05)}
 #rec.buy  .r-title{color:var(--green)}
 #rec.wait .r-title{color:var(--yellow)}
 #rec.hold .r-title{color:var(--red)}
 
-/* CARDS EM DUAS COLUNAS */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:680px){.two-col{grid-template-columns:1fr}}
-
 /* CARD GENÉRICO */
 .card{background:var(--card);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden}
 .card-head{
-  padding:16px 20px 10px;font-size:11px;text-transform:uppercase;
-  letter-spacing:.8px;color:var(--muted);border-bottom:1px solid var(--brd);
-  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 18px 12px;font-size:11px;text-transform:uppercase;
+  letter-spacing:.9px;color:var(--muted);border-bottom:1px solid var(--brd);
+  display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
 }
-.card-body{padding:20px}
+.card-body{padding:16px 18px}
 
-/* CHART */
-#chartWrap{padding:16px 20px 20px}
-#priceChart{max-height:260px}
-
-/* LOJAS STATUS */
-.loja-list{display:flex;flex-direction:column;gap:8px}
+/* LOJAS */
+.loja-list{display:flex;flex-direction:column;gap:9px}
 .loja-row{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 14px;border-radius:7px;
+  display:flex;align-items:center;gap:12px;
+  padding:13px 15px;border-radius:10px;
   background:var(--surf);border:1px solid var(--brd);
   text-decoration:none;color:inherit;cursor:pointer;
-  transition:border-color .15s, background .15s;
+  transition:border-color .15s, transform .1s, background .15s;
 }
-.loja-row:hover{border-color:var(--accent);background:var(--card)}
-.loja-name{font-weight:500;flex:1;font-size:13px}
-.loja-price{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;color:var(--text)}
-.loja-ts{font-size:11px;color:var(--muted);margin-top:2px}
-.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.dot-ok  {background:var(--green)}
-.dot-err {background:var(--red)}
-.dot-pend{background:var(--muted)}
+.loja-row:hover{border-color:var(--accent);background:var(--card);transform:translateY(-1px)}
+.loja-row.loja-min{border-color:rgba(0,212,138,.45);background:rgba(0,212,138,.05)}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-ok {background:var(--green)}
+.dot-err{background:var(--red)}
+.loja-info{flex:1;min-width:0}
+.loja-name{font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.loja-tag{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+  color:var(--green);background:rgba(0,212,138,.14);
+  padding:1px 7px;border-radius:20px;
+}
 .loja-err-msg{font-size:11px;color:var(--red);margin-top:2px}
-.loja-link{font-size:11px;color:var(--accent);text-decoration:none;opacity:.8}
-.loja-link:hover{opacity:1}
+.loja-price{font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:#fff;white-space:nowrap}
+.loja-arrow{color:var(--muted);font-size:12px;flex-shrink:0}
 
-/* TABELA HISTÓRICO */
+/* CHART */
+#chartWrap{padding:10px 12px 16px}
+#priceChart{max-height:260px}
+
+/* TABELA */
 .tbl-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse}
+table{width:100%;border-collapse:collapse;min-width:480px}
 thead th{
   font-size:11px;text-transform:uppercase;letter-spacing:.7px;
-  color:var(--muted);padding:10px 16px;text-align:left;
-  border-bottom:1px solid var(--brd);background:var(--surf);
-  white-space:nowrap;
+  color:var(--muted);padding:11px 16px;text-align:left;
+  border-bottom:1px solid var(--brd);background:var(--surf);white-space:nowrap;
 }
-tbody tr{border-bottom:1px solid rgba(37,37,53,.6);transition:background .15s}
+tbody tr{border-bottom:1px solid rgba(35,35,47,.6);transition:background .15s}
 tbody tr:last-child{border-bottom:none}
-tbody tr:hover{background:rgba(255,255,255,.02)}
-tbody td{padding:10px 16px;font-size:13px}
+tbody tr:hover{background:rgba(255,255,255,.025)}
+tbody td{padding:11px 16px;font-size:13px}
 .td-price{font-family:'DM Mono',monospace;font-weight:500;font-size:14px}
-.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500}
-.b-min {background:rgba(0,212,138,.15);color:var(--green)}
-.b-max {background:rgba(255,68,102,.12);color:var(--red)}
-.b-avg {background:rgba(51,153,255,.12);color:var(--accent)}
-.b-ok  {background:rgba(96,96,128,.15);color:var(--muted)}
+.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;white-space:nowrap}
+.b-min{background:rgba(0,212,138,.15);color:var(--green)}
+.b-max{background:rgba(255,77,103,.13);color:var(--red)}
+.b-avg{background:rgba(59,155,255,.13);color:var(--accent)}
+.b-ok {background:rgba(122,127,153,.15);color:var(--muted)}
 
-/* SITES CONFIG */
-.site-config-list{display:flex;flex-direction:column;gap:8px}
-.site-config-row{
-  display:grid;grid-template-columns:1fr 2fr 2fr auto;gap:8px;align-items:center;
-  padding:10px 12px;background:var(--surf);border:1px solid var(--brd);border-radius:7px;
-}
-.site-config-row input{
-  background:var(--bg);border:1px solid var(--brd);border-radius:5px;
-  color:var(--text);font-family:'Inter',sans-serif;font-size:12px;
-  padding:5px 9px;outline:none;width:100%;
-}
-.site-config-row input:focus{border-color:var(--blue)}
-.btn-rm{
-  background:transparent;border:1px solid var(--brd);color:var(--muted);
-  border-radius:5px;width:28px;height:28px;cursor:pointer;font-size:15px;
-  display:flex;align-items:center;justify-content:center;transition:all .2s;
-}
-.btn-rm:hover{border-color:var(--red);color:var(--red)}
-.btn-sm{
-  background:var(--surf);border:1px solid var(--brd);color:var(--text);
-  border-radius:5px;padding:5px 12px;font-size:12px;cursor:pointer;transition:all .2s;
-}
-.btn-sm:hover{border-color:var(--accent);color:var(--accent)}
-.btn-primary{background:var(--blue);color:#fff;border:none}
-.btn-primary:hover{background:#0080ff}
+/* FOOTER */
+footer{padding:4px 16px 40px;text-align:center;font-size:11px;color:var(--muted)}
 
 /* TOAST */
 #toast{
-  position:fixed;bottom:24px;right:24px;
-  background:var(--card);border:1px solid var(--brd);border-radius:8px;
+  position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);
+  background:var(--card);border:1px solid var(--brd);border-radius:10px;
   padding:12px 18px;font-size:13px;color:var(--text);
   box-shadow:0 8px 32px rgba(0,0,0,.5);
-  transform:translateY(20px);opacity:0;pointer-events:none;
-  transition:all .3s;z-index:999;
+  opacity:0;pointer-events:none;transition:all .3s;z-index:999;
 }
-#toast.show{transform:translateY(0);opacity:1}
+#toast.show{transform:translate(-50%,0);opacity:1}
 
 /* EMPTY */
-.empty{padding:32px;text-align:center;color:var(--muted);font-size:13px}
-.spinning{animation:spin 1s linear infinite;display:inline-block}
-@keyframes spin{to{transform:rotate(360deg)}}
+.empty{padding:28px;text-align:center;color:var(--muted);font-size:13px}
+
+@media(max-width:480px){
+  header{padding:10px 14px}
+  main{padding:16px 12px 56px;gap:14px}
+  .hero{padding:18px 18px 15px}
+  .loja-row{padding:11px 13px}
+  .loja-price{font-size:14px}
+}
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">PS</div>
-  <h1>PS5 Slim <span>Tracker</span></h1>
+  <h1>PS5 <span>Tracker</span></h1>
   <div class="header-right">
+    <span class="tag-cron">atualiza a cada 12h</span>
     <span id="status-pill">aguardando…</span>
   </div>
 </header>
 
 <main>
-  <!-- STATS -->
-  <div class="stats-row">
-    <div class="stat s-green">
-      <div class="s-label">Menor preço</div>
-      <div class="s-val" id="v-min">—</div>
-      <div class="s-sub" id="s-min">nenhum dado</div>
-    </div>
-    <div class="stat s-blue">
-      <div class="s-label">Média geral</div>
-      <div class="s-val" id="v-avg">—</div>
-      <div class="s-sub" id="s-avg">nenhum dado</div>
-    </div>
-    <div class="stat">
-      <div class="s-label">Último registro</div>
-      <div class="s-val" id="v-last">—</div>
-      <div class="s-sub" id="s-last">nenhum dado</div>
-    </div>
-    <div class="stat s-yellow">
-      <div class="s-label">Registros</div>
-      <div class="s-val" id="v-count">0</div>
-      <div class="s-sub">coletas totais</div>
-    </div>
-  </div>
+  <!-- MENOR PREÇO -->
+  <section class="hero">
+    <div class="hero-label">Menor preço agora</div>
+    <div class="hero-price" id="hero-min">—</div>
+    <div class="hero-store" id="hero-store">coletando…</div>
+    <div class="hero-meta" id="hero-meta"></div>
+  </section>
 
   <!-- RECOMENDAÇÃO -->
   <div id="rec">
     <div class="icon">📊</div>
     <div>
       <div class="r-title">Aguardando dados</div>
-      <div class="r-body">Clique em "Atualizar preços" para buscar os valores atuais nas lojas configuradas.</div>
+      <div class="r-body">A primeira coleta acontece automaticamente a cada 12 horas.</div>
     </div>
   </div>
 
-  <!-- CHART + LOJAS -->
-  <div class="two-col">
-    <div class="card" style="grid-column:1/-1">
-      <div class="card-head">Histórico de preços</div>
-      <div id="chartWrap"><canvas id="priceChart"></canvas></div>
-    </div>
-  </div>
-
-  <div class="two-col">
-    <!-- STATUS DAS LOJAS -->
-    <div class="card">
-      <div class="card-head">
-        <span>Status das lojas</span>
-        <span id="ultima-coleta" style="font-size:11px;color:var(--muted)"></span>
-      </div>
-      <div class="card-body">
-        <div id="loja-list" class="loja-list">
-          <div class="empty">Nenhuma coleta ainda</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TABELA HISTÓRICO -->
+  <!-- LOJAS -->
   <div class="card">
     <div class="card-head">
-      <span>Histórico completo</span>
+      <span>Preços por loja</span>
+      <span id="ultima-coleta" style="font-size:11px;color:var(--muted)"></span>
     </div>
+    <div class="card-body">
+      <div id="loja-list" class="loja-list">
+        <div class="empty">Nenhuma coleta ainda</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRÁFICO -->
+  <div class="card">
+    <div class="card-head">Histórico de preços</div>
+    <div id="chartWrap"><canvas id="priceChart"></canvas></div>
+  </div>
+
+  <!-- TABELA -->
+  <div class="card">
+    <div class="card-head">Registros</div>
     <div class="tbl-wrap" id="tbl-wrap">
       <div class="empty">Nenhum registro ainda</div>
     </div>
   </div>
 </main>
+
+<footer>PS5 Slim Tracker · coleta automática a cada 12h via GitHub Actions</footer>
 
 <div id="toast"></div>
 
@@ -276,64 +240,32 @@ tbody td{padding:10px 16px;font-size:13px}
 // ── UTILS ─────────────────────────────────────────────────────────
 const fmt = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const fmtDT = iso => new Date(iso).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});
-const toast = (msg, dur=3000) => {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), dur);
-};
 
-// ── CHART ─────────────────────────────────────────────────────────
-let chart = null;
-function renderChart(hist) {
-  const ctx = document.getElementById('priceChart');
-  if (!hist.length) { ctx.style.display='none'; return; }
-  ctx.style.display = 'block';
+// ── HERO (menor preço agora + resumo) ─────────────────────────────
+function renderHero(hist, status) {
+  const minEl   = document.getElementById('hero-min');
+  const storeEl = document.getElementById('hero-store');
+  const metaEl  = document.getElementById('hero-meta');
 
-  // Agrupa por data (pega o menor preço do dia)
-  const byDay = {};
-  hist.forEach(e => {
-    const d = e.timestamp.slice(0,10);
-    if (!byDay[d] || e.preco < byDay[d]) byDay[d] = e.preco;
-  });
-  const days   = Object.keys(byDay).sort();
-  const prices = days.map(d => byDay[d]);
-  const minP   = Math.min(...prices);
+  const oks = (status?.resultados || []).filter(r => r.status === 'ok' && r.preco != null);
+  if (oks.length) {
+    const best = oks.reduce((a,b) => a.preco < b.preco ? a : b);
+    minEl.textContent   = fmt(best.preco);
+    storeEl.textContent = best.nome;
+  } else {
+    minEl.textContent   = '—';
+    storeEl.textContent = 'sem dados ainda';
+  }
 
-  if (chart) chart.destroy();
-  chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: days.map(d => new Date(d+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})),
-      datasets:[{
-        data: prices,
-        borderColor: '#0066cc',
-        backgroundColor: 'rgba(0,102,204,.07)',
-        borderWidth: 2,
-        pointBackgroundColor: prices.map(p => p===minP ? '#00d48a' : '#0066cc'),
-        pointBorderColor:     prices.map(p => p===minP ? '#00d48a' : '#0066cc'),
-        pointRadius: 5,
-        pointHoverRadius: 8,
-        tension: 0.35,
-        fill: true,
-      }]
-    },
-    options:{
-      responsive:true,
-      plugins:{
-        legend:{display:false},
-        tooltip:{
-          backgroundColor:'#16161f',borderColor:'#252535',borderWidth:1,
-          titleColor:'#606080',bodyColor:'#dde0ee',
-          callbacks:{label: c => fmt(c.raw)}
-        }
-      },
-      scales:{
-        x:{grid:{color:'rgba(37,37,53,.7)'},ticks:{color:'#606080',font:{family:'DM Mono',size:11}}},
-        y:{grid:{color:'rgba(37,37,53,.7)'},ticks:{color:'#606080',font:{family:'DM Mono',size:11},callback:v=>'R$'+v.toLocaleString('pt-BR')}}
-      }
-    }
-  });
+  const prices = hist.map(e => e.preco);
+  const parts  = [];
+  if (prices.length) {
+    parts.push('mínimo histórico ' + fmt(Math.min(...prices)));
+    parts.push('média ' + fmt(prices.reduce((a,b)=>a+b,0)/prices.length));
+  }
+  parts.push(prices.length + (prices.length === 1 ? ' registro' : ' registros'));
+  if (status?.rodada) parts.push('coleta ' + fmtDT(status.rodada));
+  metaEl.textContent = parts.join(' · ');
 }
 
 // ── RECOMENDAÇÃO ──────────────────────────────────────────────────
@@ -371,27 +303,62 @@ function renderRec(hist) {
   }
 }
 
-// ── STATS ─────────────────────────────────────────────────────────
-function renderStats(hist) {
-  if (!hist.length) return;
-  const prices = hist.map(e=>e.preco);
-  const min  = Math.min(...prices);
-  const avg  = prices.reduce((a,b)=>a+b,0)/prices.length;
-  const last = hist[hist.length-1];
-  const minEntry = hist.find(e=>e.preco===min);
+// ── CHART ─────────────────────────────────────────────────────────
+let chart = null;
+function renderChart(hist) {
+  const ctx = document.getElementById('priceChart');
+  if (!hist.length) { ctx.style.display='none'; return; }
+  ctx.style.display = 'block';
 
-  document.getElementById('v-min').textContent  = fmt(min);
-  document.getElementById('s-min').textContent  = minEntry?.nome || '—';
-  document.getElementById('v-avg').textContent  = fmt(avg);
-  document.getElementById('s-avg').textContent  = `${hist.length} registros`;
-  document.getElementById('v-last').textContent = fmt(last.preco);
-  document.getElementById('s-last').textContent = `${last.nome} · ${fmtDT(last.timestamp)}`;
-  document.getElementById('v-count').textContent= hist.length;
+  const byDay = {};
+  hist.forEach(e => {
+    const d = e.timestamp.slice(0,10);
+    if (!byDay[d] || e.preco < byDay[d]) byDay[d] = e.preco;
+  });
+  const days   = Object.keys(byDay).sort();
+  const prices = days.map(d => byDay[d]);
+  const minP   = Math.min(...prices);
+
+  if (chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: days.map(d => new Date(d+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})),
+      datasets:[{
+        data: prices,
+        borderColor: '#0066cc',
+        backgroundColor: 'rgba(0,102,204,.10)',
+        borderWidth: 2,
+        pointBackgroundColor: prices.map(p => p===minP ? '#00d48a' : '#0066cc'),
+        pointBorderColor:     prices.map(p => p===minP ? '#00d48a' : '#0066cc'),
+        pointRadius: 4,
+        pointHoverRadius: 7,
+        tension: 0.35,
+        fill: true,
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:'#14141f',borderColor:'#23232f',borderWidth:1,
+          titleColor:'#7a7f99',bodyColor:'#e6e8f2',
+          callbacks:{label: c => fmt(c.raw)}
+        }
+      },
+      scales:{
+        x:{grid:{color:'rgba(35,35,47,.6)'},ticks:{color:'#7a7f99',font:{family:'DM Mono',size:11}}},
+        y:{grid:{color:'rgba(35,35,47,.6)'},ticks:{color:'#7a7f99',font:{family:'DM Mono',size:11},callback:v=>'R$'+v.toLocaleString('pt-BR')}}
+      }
+    }
+  });
 }
 
-// ── STATUS LOJAS ──────────────────────────────────────────────────
+// ── LOJAS (ordenadas por preço) ───────────────────────────────────
 function renderLojas(status) {
-  const el = document.getElementById('loja-list');
+  const el   = document.getElementById('loja-list');
   const pill = document.getElementById('status-pill');
   const ts   = document.getElementById('ultima-coleta');
 
@@ -401,25 +368,31 @@ function renderLojas(status) {
   }
 
   ts.textContent = 'Coleta: ' + fmtDT(status.rodada);
-  const temErro = status.resultados.some(r=>r.status!=='ok');
+  const temErro = status.resultados.some(r => r.status !== 'ok');
   pill.className = temErro ? 'err' : 'ok';
   pill.textContent = temErro ? 'parcial' : 'ok';
 
-  el.innerHTML = status.resultados.map(r => `
-    <a class="loja-row" href="${r.url}" target="_blank" rel="noopener">
+  const rows = [...status.resultados].sort((a,b) => {
+    if (a.preco == null) return 1;
+    if (b.preco == null) return -1;
+    return a.preco - b.preco;
+  });
+  let minPreco = Infinity;
+  for (const r of rows) if (r.status === 'ok' && r.preco != null && r.preco < minPreco) minPreco = r.preco;
+
+  el.innerHTML = rows.map(r => {
+    const isMin = r.status === 'ok' && r.preco != null && r.preco === minPreco;
+    return `
+    <a class="loja-row ${isMin?'loja-min':''}" href="${r.url}" target="_blank" rel="noopener">
       <div class="dot ${r.status==='ok'?'dot-ok':'dot-err'}"></div>
-      <div style="flex:1;min-width:0">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="loja-name">${r.nome}</span>
-          <span class="loja-link">↗</span>
-        </div>
+      <div class="loja-info">
+        <div class="loja-name">${r.nome}${isMin?'<span class="loja-tag">menor</span>':''}</div>
         ${r.status!=='ok' ? `<div class="loja-err-msg">${r.mensagem||'erro desconhecido'}</div>` : ''}
       </div>
-      <div style="text-align:right">
-        <div class="loja-price">${r.preco!=null?fmt(r.preco):'—'}</div>
-        <div class="loja-ts">${fmtDT(r.timestamp)}</div>
-      </div>
-    </a>`).join('');
+      <div class="loja-price">${r.preco!=null?fmt(r.preco):'—'}</div>
+      <div class="loja-arrow">↗</div>
+    </a>`;
+  }).join('');
 }
 
 // ── TABELA ────────────────────────────────────────────────────────
@@ -437,10 +410,10 @@ function renderTabela(hist) {
     return '<span class="badge b-ok">—</span>';
   };
   wrap.innerHTML = `<table>
-    <thead><tr><th>Data/hora</th><th>Loja</th><th>Preço</th><th>Indicador</th></tr></thead>
+    <thead><tr><th>Data/hora</th><th>Loja</th><th>Preço</th><th></th></tr></thead>
     <tbody>${[...hist].reverse().map(e=>`<tr>
       <td>${fmtDT(e.timestamp)}</td>
-      <td><a href="${e.url}" target="_blank" style="color:var(--accent);text-decoration:none">${e.nome}</a></td>
+      <td><a href="${e.url}" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">${e.nome}</a></td>
       <td class="td-price">${fmt(e.preco)}</td>
       <td>${badge(e.preco)}</td>
     </tr>`).join('')}</tbody>
@@ -454,11 +427,11 @@ async function carregarTudo() {
       fetch('historico.json').then(r=>r.json()),
       fetch('ultimo_status.json').then(r=>r.json()).catch(()=>({})),
     ]);
-    renderStats(hist);
+    renderHero(hist, status);
     renderRec(hist);
     renderChart(hist);
-    renderTabela(hist);
     renderLojas(status);
+    renderTabela(hist);
 
     const pill = document.getElementById('status-pill');
     if (!status?.rodada) { pill.className=''; pill.textContent='sem coleta'; }

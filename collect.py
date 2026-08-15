@@ -1,5 +1,5 @@
 """
-collect.py — coleta preços do PS5 Slim das lojas em sites.json + Mercado Livre
+collect.py — coleta preços do PS5 Slim das lojas em sites.json
 e grava historico.json / ultimo_status.json.
 
 Fontes por loja, em cascata (a primeira que retornar preço vence):
@@ -11,9 +11,8 @@ Fontes por loja, em cascata (a primeira que retornar preço vence):
 Se nenhuma funcionar e o Playwright estiver disponível, a página é renderizada
 em browser headless e a cascata é repetida (útil para lojas React/VTEX).
 
-A API do Mercado Livre (grátis) é consultada como fonte extra:
-  - anônima por padrão;
-  - com OAuth client_credentials se ML_CLIENT_ID/ML_CLIENT_SECRET estiverem definidos.
+Lojas com "tipo": "agregador" (Zoom/Buscapé) têm os preços de várias lojas
+extraídos de uma só vez, gerando uma linha por loja.
 
 Uso:
     python collect.py            # roda uma vez
@@ -22,7 +21,6 @@ Uso:
 
 import argparse
 import json
-import os
 import re
 import sys
 import time
@@ -49,9 +47,6 @@ HISTORICO_FILE = BASE_DIR / "historico.json"
 STATUS_FILE    = BASE_DIR / "ultimo_status.json"
 
 MAX_HISTORICO = 20000
-
-MERCADO_LIVRE_QUERY = os.environ.get("ML_QUERY", "playstation 5 slim digital")
-MERCADO_LIVRE_ENABLED = os.environ.get("ML_ENABLED", "1") != "0"
 
 HEADERS = {
     "User-Agent": (
@@ -394,84 +389,12 @@ def scrape_site(site) -> dict:
     return resultado
 
 
-def get_ml_access_token():
-    client_id = os.environ.get("ML_CLIENT_ID")
-    client_secret = os.environ.get("ML_CLIENT_SECRET")
-    if not (client_id and client_secret):
-        return None
-    try:
-        r = requests.post(
-            "https://api.mercadolibre.com/oauth/token",
-            data={
-                "grant_type": "client_credentials",
-                "client_id": client_id,
-                "client_secret": client_secret,
-            },
-            timeout=15,
-        )
-        if r.status_code == 200:
-            return r.json().get("access_token")
-    except Exception:
-        pass
-    return None
-
-
-def scrape_mercado_livre(query: str) -> dict:
-    resultado = new_result("Mercado Livre", "https://www.mercadolivre.com.br/")
-    try:
-        token = get_ml_access_token()
-        headers = dict(HEADERS)
-        if token:
-            headers["Authorization"] = f"Bearer {token}"
-
-        r = requests.get(
-            "https://api.mercadolibre.com/sites/MLB/search",
-            params={"q": query, "limit": 50, "sort": "price_asc"},
-            headers=headers,
-            timeout=20,
-        )
-        r.raise_for_status()
-        data = r.json()
-
-        candidatos = []
-        for item in data.get("results", []):
-            title = (item.get("title") or "").lower()
-            if "playstation" not in title and "ps5" not in title:
-                continue
-            if item.get("condition") != "new":
-                continue
-            preco = item.get("price")
-            if preco:
-                candidatos.append((preco, item))
-
-        if not candidatos:
-            resultado["mensagem"] = "Nenhum anúncio novo relevante"
-            resultado["status"] = "seletor_falhou"
-        else:
-            candidatos.sort(key=lambda x: x[0])
-            preco, item = candidatos[0]
-            resultado["preco"] = float(preco)
-            resultado["url"] = item.get("permalink") or resultado["url"]
-            resultado["status"] = "ok"
-            print(f"  OK Mercado Livre: R$ {preco:,.2f} [{item.get('title', '')[:40]}]")
-
-    except requests.exceptions.HTTPError as e:
-        resultado["mensagem"] = f"HTTP {e.response.status_code}"
-    except Exception as e:
-        resultado["mensagem"] = str(e)[:140]
-
-    if resultado["status"] == "erro":
-        print(f"  ERRO Mercado Livre: {resultado['mensagem']}")
-
-    return resultado
-
-
 def run_once():
     sites = load_sites()
     historico = load_json(HISTORICO_FILE, [])
     rodada_ts = datetime.now().isoformat(timespec="seconds")
 
-    print(f"\n[{rodada_ts}] Buscando preços em {len(sites)} site(s) + Mercado Livre...")
+    print(f"\n[{rodada_ts}] Buscando preços em {len(sites)} fonte(s)...")
 
     resultados = []
     for site in sites:
@@ -480,9 +403,6 @@ def run_once():
         else:
             resultados.append(scrape_site(site))
         time.sleep(1.5)
-
-    if MERCADO_LIVRE_ENABLED:
-        resultados.append(scrape_mercado_livre(MERCADO_LIVRE_QUERY))
 
     novos = 0
     for r in resultados:

@@ -5,11 +5,6 @@
     "seletor": "div.w-full.p-8.rounded-8.border-solid.border.border-black-400 > h4"
   },
   {
-    "nome": "Amazon",
-    "url": "https://www.amazon.com.br/dp/B0FPGF9J2J",
-    "seletor": "span.a-offscreen"
-  },
-  {
     "nome": "WebFones",
     "url": "https://www.webfones.com.br/console-ps5-slim-digital-825gb-astro-bot-gran-turismo-7-sony/p",
     "seletor": "span.vtex-product-price-1-x-sellingPriceValue"
