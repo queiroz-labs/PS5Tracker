@@ -154,8 +154,12 @@
         </div>
       </div>
       
-      <div class="flex items-center gap-3">
-        <span class="hidden sm:inline text-xs text-muted">atualiza a cada 12h</span>
+      <div class="flex items-center gap-2 sm:gap-3">
+        <span class="hidden md:inline text-xs text-muted">atualiza a cada 12h</span>
+        <button id="btn-notif" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surf border border-brd text-xs font-medium text-muted hover:text-text hover:border-accent-blue/50 transition-colors" title="Ativar notificações de preço">
+          <i data-lucide="bell" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Notificar</span>
+        </button>
         <div id="status-pill" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surf border border-brd text-xs font-medium">
           <span class="status-dot w-2 h-2 rounded-full bg-muted"></span>
           <span>aguardando...</span>
@@ -175,9 +179,10 @@
         </div>
         
         <div class="relative z-10">
-          <div class="flex items-center gap-2 mb-3">
+          <div class="flex items-center gap-2 mb-3 flex-wrap">
             <i data-lucide="trending-down" class="w-5 h-5 text-success"></i>
             <span class="text-sm font-semibold text-success uppercase tracking-wide">Menor preço agora</span>
+            <span id="hero-trend" class="hidden text-xs font-semibold px-2 py-0.5 rounded-full border"></span>
           </div>
           
           <div class="mb-4">
@@ -568,19 +573,123 @@
       lucide.createIcons();
     }
     
-    // Load
+    // ── Tendência + Notificações ─────────────────────────────────
+    let dadosAtuais = null;
+
+    function agruparPorColeta(hist) {
+      const sorted = [...hist].sort((a, b) => a.timestamp.localeCompare(b.timestamp));
+      const coletas = [];
+      for (const e of sorted) {
+        const last = coletas[coletas.length - 1];
+        if (!last || (new Date(e.timestamp) - new Date(last.ts)) > 10 * 60 * 1000) {
+          coletas.push({ ts: e.timestamp, min: e.preco, nome: e.nome });
+        } else if (e.preco < last.min) {
+          last.min = e.preco;
+          last.nome = e.nome;
+        }
+      }
+      return coletas;
+    }
+
+    function renderTrend(coletas) {
+      const el = document.getElementById('hero-trend');
+      if (!el) return;
+      if (coletas.length < 2) { el.className = 'hidden'; return; }
+      const atual = coletas[coletas.length - 1];
+      const anterior = coletas[coletas.length - 2];
+      const diff = (atual.min - anterior.min) / anterior.min * 100;
+      let txt, cls;
+      if (diff < -0.5) { txt = 'Caindo'; cls = 'text-success bg-success/15 border-success/30'; }
+      else if (diff > 0.5) { txt = 'Subindo'; cls = 'text-danger bg-danger/15 border-danger/30'; }
+      else { txt = 'Estável'; cls = 'text-muted bg-muted/15 border-brd'; }
+      el.className = `text-xs font-semibold px-2 py-0.5 rounded-full border ${cls}`;
+      el.textContent = txt;
+    }
+
+    function checarNotificacao(coletas) {
+      if (!('Notification' in window) || Notification.permission !== 'granted') return;
+      if (!coletas.length) return;
+      const minHistorico = Math.min(...coletas.map(c => c.min));
+      const key = 'ps5_last_min';
+      const lastMin = parseFloat(localStorage.getItem(key));
+      if (isNaN(lastMin)) {
+        localStorage.setItem(key, String(minHistorico));
+        return;
+      }
+      if (minHistorico < lastMin) {
+        const menor = coletas.find(c => c.min === minHistorico) || coletas[coletas.length - 1];
+        localStorage.setItem(key, String(minHistorico));
+        try {
+          const n = new Notification('Nova baixa histórica!', {
+            body: `PS5 Slim por ${fmt(minHistorico)} na ${menor.nome}`,
+            icon: 'logo.png',
+            tag: 'ps5-low'
+          });
+          n.onclick = () => { window.focus(); };
+        } catch (e) {}
+      }
+    }
+
+    function setupNotificacoes() {
+      const btn = document.getElementById('btn-notif');
+      if (!('Notification' in window)) {
+        if (btn) btn.style.display = 'none';
+        return;
+      }
+      const render = () => {
+        const p = Notification.permission;
+        if (p === 'granted') {
+          btn.className = 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-success/10 border border-success/30 text-xs font-medium text-success';
+          btn.innerHTML = '<i data-lucide="bell-ring" class="w-4 h-4"></i><span class="hidden sm:inline">Ativo</span>';
+        } else if (p === 'denied') {
+          btn.className = 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-danger/10 border border-danger/30 text-xs font-medium text-danger';
+          btn.innerHTML = '<i data-lucide="bell-off" class="w-4 h-4"></i><span class="hidden sm:inline">Bloqueado</span>';
+        } else {
+          btn.className = 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-surf border border-brd text-xs font-medium text-muted hover:text-text hover:border-accent-blue/50 transition-colors';
+          btn.innerHTML = '<i data-lucide="bell" class="w-4 h-4"></i><span class="hidden sm:inline">Notificar</span>';
+        }
+        lucide.createIcons();
+      };
+      const afterPerm = (p) => {
+        render();
+        if (p === 'granted') {
+          if (dadosAtuais && dadosAtuais.coletas.length) {
+            const m = Math.min(...dadosAtuais.coletas.map(c => c.min));
+            localStorage.setItem('ps5_last_min', String(m));
+          }
+          toast('Notificações ativadas');
+        } else if (p === 'denied') {
+          toast('Notificações bloqueadas pelo navegador');
+        }
+      };
+      render();
+      btn.addEventListener('click', () => {
+        try {
+          const r = Notification.requestPermission();
+          if (r && typeof r.then === 'function') r.then(afterPerm);
+          else Notification.requestPermission(afterPerm);
+        } catch (e) { afterPerm('denied'); }
+      });
+    }
+
+    // ── Load ──────────────────────────────────────────────────────
     async function carregarTudo() {
       try {
         const [hist, status] = await Promise.all([
           fetch('historico.json').then(r => r.json()),
           fetch('ultimo_status.json').then(r => r.json()).catch(() => ({})),
         ]);
+        const coletas = agruparPorColeta(hist);
+        dadosAtuais = { hist, status, coletas };
+
         renderHero(hist, status);
         renderRec(hist);
         renderChart(hist);
         renderLojas(status);
         renderTabela(hist);
-        
+        renderTrend(coletas);
+        checarNotificacao(coletas);
+
         const pill = document.getElementById('status-pill');
         if (!status?.rodada) {
           pill.className = 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-surf border border-brd text-xs font-medium';
@@ -592,9 +701,11 @@
         pill.innerHTML = '<span class="status-dot w-2 h-2 rounded-full bg-danger"></span><span>offline</span>';
       }
     }
-    
-    // Init
+
+    // ── Init ──────────────────────────────────────────────────────
+    setupNotificacoes();
     carregarTudo();
+    setInterval(carregarTudo, 30 * 60 * 1000);
   </script>
 </body>
 </html>
