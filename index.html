@@ -168,9 +168,11 @@
     
     <!-- Hero: Menor Preço -->
     <section class="animate-fade-in">
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-accent-blue/10 via-card to-accent-purple/10 border border-brd/50 p-6 sm:p-8">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-accent-blue/5 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-accent-purple/5 rounded-full blur-3xl"></div>
+      <div class="relative rounded-2xl bg-gradient-to-br from-accent-blue/10 via-card to-accent-purple/10 border border-brd/50 p-6 sm:p-8">
+        <div class="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-accent-blue/5 rounded-full blur-3xl"></div>
+          <div class="absolute bottom-0 left-0 w-64 h-64 bg-accent-purple/5 rounded-full blur-3xl"></div>
+        </div>
         
         <div class="relative z-10">
           <div class="flex items-center gap-2 mb-3">
@@ -179,7 +181,7 @@
           </div>
           
           <div class="mb-4">
-            <div id="hero-min" class="text-5xl sm:text-6xl font-bold font-mono gradient-text mb-2">—</div>
+            <div id="hero-min" class="text-4xl sm:text-6xl font-bold font-mono gradient-text mb-2 whitespace-nowrap">—</div>
             <div id="hero-store" class="text-lg text-muted">coletando...</div>
           </div>
           
@@ -506,8 +508,8 @@
                 ${r.status !== 'ok' ? `<div class="text-xs text-danger mt-1">${r.mensagem || 'erro desconhecido'}</div>` : ''}
               </div>
             </div>
-            <div class="text-right">
-              <div class="font-mono font-semibold ${isMin ? 'text-success' : 'text-text'}">${r.preco != null ? fmt(r.preco) : '—'}</div>
+            <div class="text-right shrink-0">
+              <div class="font-mono font-semibold whitespace-nowrap ${isMin ? 'text-success' : 'text-text'}">${r.preco != null ? fmt(r.preco) : '—'}</div>
             </div>
           </div>
         </a>`;
@@ -552,12 +554,12 @@
           <tbody class="divide-y divide-brd/30">
             ${[...hist].reverse().map(e => `
               <tr class="hover:bg-surf/50 transition-colors">
-                <td class="px-5 py-3 text-sm text-muted">${fmtDT(e.timestamp)}</td>
+                <td class="px-5 py-3 text-sm text-muted whitespace-nowrap">${fmtDT(e.timestamp)}</td>
                 <td class="px-5 py-3">
                   <a href="${e.url}" target="_blank" rel="noopener" class="text-sm text-accent-blue hover:underline font-medium">${e.nome}</a>
                 </td>
-                <td class="px-5 py-3 text-right font-mono font-semibold">${fmt(e.preco)}</td>
-                <td class="px-5 py-3 text-center">${badge(e.preco)}</td>
+                <td class="px-5 py-3 text-right font-mono font-semibold whitespace-nowrap">${fmt(e.preco)}</td>
+                <td class="px-5 py-3 text-center whitespace-nowrap">${badge(e.preco)}</td>
               </tr>
             `).join('')}
           </tbody>
