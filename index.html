@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PS5 Slim — Rastreador</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg:      #080810;
+  --surf:    #101018;
+  --card:    #16161f;
+  --brd:     #252535;
+  --blue:    #0066cc;
+  --accent:  #3399ff;
+  --green:   #00d48a;
+  --red:     #ff4466;
+  --yellow:  #ffcc44;
+  --text:    #dde0ee;
+  --muted:   #606080;
+  --r:       10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;min-height:100vh}
+
+/* HEADER */
+header{
+  background:var(--surf);border-bottom:1px solid var(--brd);
+  padding:0 28px;height:56px;display:flex;align-items:center;gap:14px;
+  position:sticky;top:0;z-index:100;
+}
+.logo{
+  width:32px;height:32px;background:var(--blue);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:12px;color:#fff;flex-shrink:0;
+  box-shadow:0 0 16px rgba(0,102,204,.45);
+}
+header h1{font-size:16px;font-weight:600;letter-spacing:-.2px}
+header h1 span{color:var(--accent)}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+#status-pill{
+  font-family:'DM Mono',monospace;font-size:11px;
+  padding:3px 10px;border-radius:20px;
+  background:rgba(96,96,128,.2);color:var(--muted);
+  border:1px solid var(--brd);
+}
+#status-pill.ok  {background:rgba(0,212,138,.1);color:var(--green);border-color:rgba(0,212,138,.3)}
+#status-pill.err {background:rgba(255,68,102,.1);color:var(--red);border-color:rgba(255,68,102,.3)}
+#btn-update{
+  background:var(--blue);color:#fff;border:none;border-radius:6px;
+  padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;
+  transition:background .2s,opacity .2s;
+}
+#btn-update:hover{background:#0080ff}
+#btn-update:disabled{opacity:.5;cursor:not-allowed}
+
+/* MAIN */
+main{max-width:980px;margin:0 auto;padding:28px 20px 60px;display:flex;flex-direction:column;gap:20px}
+
+/* STAT ROW */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.stat{
+  background:var(--card);border:1px solid var(--brd);border-radius:var(--r);
+  padding:18px 20px;position:relative;overflow:hidden;
+}
+.stat::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--blue);opacity:0;transition:opacity .3s;
+}
+.stat.s-green::after{background:var(--green);opacity:1}
+.stat.s-blue::after {background:var(--accent);opacity:1}
+.stat.s-yellow::after{background:var(--yellow);opacity:1}
+.s-label{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:7px}
+.s-val{font-family:'DM Mono',monospace;font-size:20px;font-weight:500}
+.s-sub{font-size:12px;color:var(--muted);margin-top:3px}
+
+/* REC BANNER */
+#rec{
+  border-radius:var(--r);padding:18px 22px;display:flex;gap:14px;
+  border:1px solid var(--brd);background:var(--card);
+}
+#rec .icon{font-size:26px;flex-shrink:0}
+#rec .r-title{font-size:15px;font-weight:600;margin-bottom:3px}
+#rec .r-body{font-size:13px;color:var(--muted);line-height:1.5}
+#rec.buy {border-color:rgba(0,212,138,.35);background:rgba(0,212,138,.05)}
+#rec.wait{border-color:rgba(255,204,68,.35);background:rgba(255,204,68,.05)}
+#rec.hold{border-color:rgba(255,68,102,.25);background:rgba(255,68,102,.04)}
+#rec.buy  .r-title{color:var(--green)}
+#rec.wait .r-title{color:var(--yellow)}
+#rec.hold .r-title{color:var(--red)}
+
+/* CARDS EM DUAS COLUNAS */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:680px){.two-col{grid-template-columns:1fr}}
+
+/* CARD GENÉRICO */
+.card{background:var(--card);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden}
+.card-head{
+  padding:16px 20px 10px;font-size:11px;text-transform:uppercase;
+  letter-spacing:.8px;color:var(--muted);border-bottom:1px solid var(--brd);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.card-body{padding:20px}
+
+/* CHART */
+#chartWrap{padding:16px 20px 20px}
+#priceChart{max-height:260px}
+
+/* LOJAS STATUS */
+.loja-list{display:flex;flex-direction:column;gap:8px}
+.loja-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:7px;
+  background:var(--surf);border:1px solid var(--brd);
+}
+.loja-name{font-weight:500;flex:1;font-size:13px}
+.loja-price{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;color:var(--text)}
+.loja-ts{font-size:11px;color:var(--muted);margin-top:2px}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot-ok  {background:var(--green)}
+.dot-err {background:var(--red)}
+.dot-pend{background:var(--muted)}
+.loja-err-msg{font-size:11px;color:var(--red);margin-top:2px}
+.loja-link{font-size:11px;color:var(--accent);text-decoration:none;opacity:.8}
+.loja-link:hover{opacity:1}
+
+/* TABELA HISTÓRICO */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+thead th{
+  font-size:11px;text-transform:uppercase;letter-spacing:.7px;
+  color:var(--muted);padding:10px 16px;text-align:left;
+  border-bottom:1px solid var(--brd);background:var(--surf);
+  white-space:nowrap;
+}
+tbody tr{border-bottom:1px solid rgba(37,37,53,.6);transition:background .15s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:rgba(255,255,255,.02)}
+tbody td{padding:10px 16px;font-size:13px}
+.td-price{font-family:'DM Mono',monospace;font-weight:500;font-size:14px}
+.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500}
+.b-min {background:rgba(0,212,138,.15);color:var(--green)}
+.b-max {background:rgba(255,68,102,.12);color:var(--red)}
+.b-avg {background:rgba(51,153,255,.12);color:var(--accent)}
+.b-ok  {background:rgba(96,96,128,.15);color:var(--muted)}
+
+/* SITES CONFIG */
+.site-config-list{display:flex;flex-direction:column;gap:8px}
+.site-config-row{
+  display:grid;grid-template-columns:1fr 2fr 2fr auto;gap:8px;align-items:center;
+  padding:10px 12px;background:var(--surf);border:1px solid var(--brd);border-radius:7px;
+}
+.site-config-row input{
+  background:var(--bg);border:1px solid var(--brd);border-radius:5px;
+  color:var(--text);font-family:'Inter',sans-serif;font-size:12px;
+  padding:5px 9px;outline:none;width:100%;
+}
+.site-config-row input:focus{border-color:var(--blue)}
+.btn-rm{
+  background:transparent;border:1px solid var(--brd);color:var(--muted);
+  border-radius:5px;width:28px;height:28px;cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.btn-rm:hover{border-color:var(--red);color:var(--red)}
+.btn-sm{
+  background:var(--surf);border:1px solid var(--brd);color:var(--text);
+  border-radius:5px;padding:5px 12px;font-size:12px;cursor:pointer;transition:all .2s;
+}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent)}
+.btn-primary{background:var(--blue);color:#fff;border:none}
+.btn-primary:hover{background:#0080ff}
+
+/* TOAST */
+#toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--card);border:1px solid var(--brd);border-radius:8px;
+  padding:12px 18px;font-size:13px;color:var(--text);
+  box-shadow:0 8px 32px rgba(0,0,0,.5);
+  transform:translateY(20px);opacity:0;pointer-events:none;
+  transition:all .3s;z-index:999;
+}
+#toast.show{transform:translateY(0);opacity:1}
+
+/* EMPTY */
+.empty{padding:32px;text-align:center;color:var(--muted);font-size:13px}
+.spinning{animation:spin 1s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">PS</div>
+  <h1>PS5 Slim <span>Tracker</span></h1>
+  <div class="header-right">
+    <span id="status-pill">aguardando…</span>
+  </div>
+</header>
+
+<main>
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat s-green">
+      <div class="s-label">Menor preço</div>
+      <div class="s-val" id="v-min">—</div>
+      <div class="s-sub" id="s-min">nenhum dado</div>
+    </div>
+    <div class="stat s-blue">
+      <div class="s-label">Média geral</div>
+      <div class="s-val" id="v-avg">—</div>
+      <div class="s-sub" id="s-avg">nenhum dado</div>
+    </div>
+    <div class="stat">
+      <div class="s-label">Último registro</div>
+      <div class="s-val" id="v-last">—</div>
+      <div class="s-sub" id="s-last">nenhum dado</div>
+    </div>
+    <div class="stat s-yellow">
+      <div class="s-label">Registros</div>
+      <div class="s-val" id="v-count">0</div>
+      <div class="s-sub">coletas totais</div>
+    </div>
+  </div>
+
+  <!-- RECOMENDAÇÃO -->
+  <div id="rec">
+    <div class="icon">📊</div>
+    <div>
+      <div class="r-title">Aguardando dados</div>
+      <div class="r-body">Clique em "Atualizar preços" para buscar os valores atuais nas lojas configuradas.</div>
+    </div>
+  </div>
+
+  <!-- CHART + LOJAS -->
+  <div class="two-col">
+    <div class="card" style="grid-column:1/-1">
+      <div class="card-head">Histórico de preços</div>
+      <div id="chartWrap"><canvas id="priceChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <!-- STATUS DAS LOJAS -->
+    <div class="card">
+      <div class="card-head">
+        <span>Status das lojas</span>
+        <span id="ultima-coleta" style="font-size:11px;color:var(--muted)"></span>
+      </div>
+      <div class="card-body">
+        <div id="loja-list" class="loja-list">
+          <div class="empty">Nenhuma coleta ainda</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABELA HISTÓRICO -->
+  <div class="card">
+    <div class="card-head">
+      <span>Histórico completo</span>
+    </div>
+    <div class="tbl-wrap" id="tbl-wrap">
+      <div class="empty">Nenhum registro ainda</div>
+    </div>
+  </div>
+</main>
+
+<div id="toast"></div>
+
+<script>
+// ── UTILS ─────────────────────────────────────────────────────────
+const fmt = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const fmtDT = iso => new Date(iso).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});
+const toast = (msg, dur=3000) => {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), dur);
+};
+
+// ── CHART ─────────────────────────────────────────────────────────
+let chart = null;
+function renderChart(hist) {
+  const ctx = document.getElementById('priceChart');
+  if (!hist.length) { ctx.style.display='none'; return; }
+  ctx.style.display = 'block';
+
+  // Agrupa por data (pega o menor preço do dia)
+  const byDay = {};
+  hist.forEach(e => {
+    const d = e.timestamp.slice(0,10);
+    if (!byDay[d] || e.preco < byDay[d]) byDay[d] = e.preco;
+  });
+  const days   = Object.keys(byDay).sort();
+  const prices = days.map(d => byDay[d]);
+  const minP   = Math.min(...prices);
+
+  if (chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: days.map(d => new Date(d+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})),
+      datasets:[{
+        data: prices,
+        borderColor: '#0066cc',
+        backgroundColor: 'rgba(0,102,204,.07)',
+        borderWidth: 2,
+        pointBackgroundColor: prices.map(p => p===minP ? '#00d48a' : '#0066cc'),
+        pointBorderColor:     prices.map(p => p===minP ? '#00d48a' : '#0066cc'),
+        pointRadius: 5,
+        pointHoverRadius: 8,
+        tension: 0.35,
+        fill: true,
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:'#16161f',borderColor:'#252535',borderWidth:1,
+          titleColor:'#606080',bodyColor:'#dde0ee',
+          callbacks:{label: c => fmt(c.raw)}
+        }
+      },
+      scales:{
+        x:{grid:{color:'rgba(37,37,53,.7)'},ticks:{color:'#606080',font:{family:'DM Mono',size:11}}},
+        y:{grid:{color:'rgba(37,37,53,.7)'},ticks:{color:'#606080',font:{family:'DM Mono',size:11},callback:v=>'R$'+v.toLocaleString('pt-BR')}}
+      }
+    }
+  });
+}
+
+// ── RECOMENDAÇÃO ──────────────────────────────────────────────────
+function renderRec(hist) {
+  const el = document.getElementById('rec');
+  if (hist.length < 3) {
+    el.className='';
+    el.innerHTML=`<div class="icon">📊</div><div><div class="r-title">Dados insuficientes</div><div class="r-body">São necessários pelo menos 3 registros. Você tem ${hist.length} até agora.</div></div>`;
+    return;
+  }
+  const prices = hist.map(e=>e.preco);
+  const min  = Math.min(...prices);
+  const max  = Math.max(...prices);
+  const avg  = prices.reduce((a,b)=>a+b,0)/prices.length;
+  const last = hist[hist.length-1].preco;
+  const pct  = ((last-min)/min*100);
+  const range= ((max-min)/min*100).toFixed(0);
+
+  let trend = 'estável';
+  if (hist.length >= 5) {
+    const r = prices.slice(-3).reduce((a,b)=>a+b,0)/3;
+    const o = prices.slice(0,-3).reduce((a,b)=>a+b,0)/(prices.length-3);
+    if (r < o*.97) trend='caindo'; else if (r > o*1.03) trend='subindo';
+  }
+
+  if (pct <= 3 && last <= avg) {
+    el.className='buy';
+    el.innerHTML=`<div class="icon">✅</div><div><div class="r-title">Bom momento para comprar</div><div class="r-body">Preço atual (${fmt(last)}) está apenas ${pct.toFixed(1)}% acima do mínimo histórico (${fmt(min)}).${trend==='subindo'?' Atenção: tendência recente de alta.':''}</div></div>`;
+  } else if (last <= avg*1.05) {
+    el.className='wait';
+    el.innerHTML=`<div class="icon">⏳</div><div><div class="r-title">Preço razoável — espere uma promoção</div><div class="r-body">${fmt(last)} está ${pct.toFixed(1)}% acima do mínimo (${fmt(min)}). Variação histórica: ${range}%.${trend==='caindo'?' Tendência de queda recente — pode baixar mais.':''}</div></div>`;
+  } else {
+    el.className='hold';
+    el.innerHTML=`<div class="icon">🚫</div><div><div class="r-title">Preço elevado — aguarde</div><div class="r-body">${fmt(last)} é ${pct.toFixed(1)}% acima do mínimo. Já foi visto por ${fmt(min)}.${trend==='caindo'?' Boa notícia: tendência de queda.':''}</div></div>`;
+  }
+}
+
+// ── STATS ─────────────────────────────────────────────────────────
+function renderStats(hist) {
+  if (!hist.length) return;
+  const prices = hist.map(e=>e.preco);
+  const min  = Math.min(...prices);
+  const avg  = prices.reduce((a,b)=>a+b,0)/prices.length;
+  const last = hist[hist.length-1];
+  const minEntry = hist.find(e=>e.preco===min);
+
+  document.getElementById('v-min').textContent  = fmt(min);
+  document.getElementById('s-min').textContent  = minEntry?.nome || '—';
+  document.getElementById('v-avg').textContent  = fmt(avg);
+  document.getElementById('s-avg').textContent  = `${hist.length} registros`;
+  document.getElementById('v-last').textContent = fmt(last.preco);
+  document.getElementById('s-last').textContent = `${last.nome} · ${fmtDT(last.timestamp)}`;
+  document.getElementById('v-count').textContent= hist.length;
+}
+
+// ── STATUS LOJAS ──────────────────────────────────────────────────
+function renderLojas(status) {
+  const el = document.getElementById('loja-list');
+  const pill = document.getElementById('status-pill');
+  const ts   = document.getElementById('ultima-coleta');
+
+  if (!status?.resultados?.length) {
+    el.innerHTML = '<div class="empty">Nenhuma coleta ainda</div>';
+    return;
+  }
+
+  ts.textContent = 'Coleta: ' + fmtDT(status.rodada);
+  const temErro = status.resultados.some(r=>r.status!=='ok');
+  pill.className = temErro ? 'err' : 'ok';
+  pill.textContent = temErro ? 'parcial' : 'ok';
+
+  el.innerHTML = status.resultados.map(r => `
+    <div class="loja-row">
+      <div class="dot ${r.status==='ok'?'dot-ok':'dot-err'}"></div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="loja-name">${r.nome}</span>
+          <a class="loja-link" href="${r.url}" target="_blank">↗</a>
+        </div>
+        ${r.status!=='ok' ? `<div class="loja-err-msg">${r.mensagem||'erro desconhecido'}</div>` : ''}
+      </div>
+      <div style="text-align:right">
+        <div class="loja-price">${r.preco!=null?fmt(r.preco):'—'}</div>
+        <div class="loja-ts">${fmtDT(r.timestamp)}</div>
+      </div>
+    </div>`).join('');
+}
+
+// ── TABELA ────────────────────────────────────────────────────────
+function renderTabela(hist) {
+  const wrap = document.getElementById('tbl-wrap');
+  if (!hist.length) { wrap.innerHTML='<div class="empty">Nenhum registro ainda</div>'; return; }
+
+  const prices = hist.map(e=>e.preco);
+  const min = Math.min(...prices), max = Math.max(...prices);
+  const avg = prices.reduce((a,b)=>a+b,0)/prices.length;
+  const badge = p => {
+    if (p===min) return '<span class="badge b-min">mínimo</span>';
+    if (p===max) return '<span class="badge b-max">máximo</span>';
+    if (Math.abs(p-avg)/avg<.02) return '<span class="badge b-avg">~média</span>';
+    return '<span class="badge b-ok">—</span>';
+  };
+  wrap.innerHTML = `<table>
+    <thead><tr><th>Data/hora</th><th>Loja</th><th>Preço</th><th>Indicador</th></tr></thead>
+    <tbody>${[...hist].reverse().map(e=>`<tr>
+      <td>${fmtDT(e.timestamp)}</td>
+      <td><a href="${e.url}" target="_blank" style="color:var(--accent);text-decoration:none">${e.nome}</a></td>
+      <td class="td-price">${fmt(e.preco)}</td>
+      <td>${badge(e.preco)}</td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+// ── CARREGAR ──────────────────────────────────────────────────────
+async function carregarTudo() {
+  try {
+    const [hist, status] = await Promise.all([
+      fetch('historico.json').then(r=>r.json()),
+      fetch('ultimo_status.json').then(r=>r.json()).catch(()=>({})),
+    ]);
+    renderStats(hist);
+    renderRec(hist);
+    renderChart(hist);
+    renderTabela(hist);
+    renderLojas(status);
+
+    const pill = document.getElementById('status-pill');
+    if (!status?.rodada) { pill.className=''; pill.textContent='sem coleta'; }
+  } catch {
+    document.getElementById('status-pill').className='err';
+    document.getElementById('status-pill').textContent='offline';
+  }
+}
+
+// ── INIT ─────────────────────────────────────────────────────────
+carregarTudo();
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+[
+  {
+    "nome": "Kabum",
+    "url": "https://www.kabum.com.br/produto/989702/console-sony-playstation-5-ssd-825gb-controle-sem-fio-dualsense-2-jogos-digitais-edicao-digital",
+    "seletor": "div.w-full.p-8.rounded-8.border-solid.border.border-black-400 > h4"
+  },
+  {
+    "nome": "Amazon",
+    "url": "https://www.amazon.com.br/dp/B0FPGF9J2J",
+    "seletor": "span.a-offscreen"
+  },
+  {
+    "nome": "WebFones",
+    "url": "https://www.webfones.com.br/console-ps5-slim-digital-825gb-astro-bot-gran-turismo-7-sony/p",
+    "seletor": "span.vtex-product-price-1-x-sellingPriceValue"
+  },
+  {
+    "nome": "Carrefour",
+    "url": "https://www.carrefour.com.br/produto/console-playstation-5-slim-digital-825gb-pacote-astro-bot-e-gran-turismo-7-336324399",
+    "seletor": "body"
+  },
+  {
+    "nome": "Americanas",
+    "url": "https://www.americanas.com.br/console-playstation-5-edicao-digital--825gb-%E2%80%93-astro-bot-4-e-gran-turismo-7/p",
+    "seletor": "jsonld"
+  }
+]
