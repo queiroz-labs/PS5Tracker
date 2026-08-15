@@ -28,5 +28,35 @@
     "nome": "Americanas",
     "url": "https://www.americanas.com.br/console-playstation-5-edicao-digital--825gb-%E2%80%93-astro-bot-4-e-gran-turismo-7/p",
     "preco": 4599.99
+  },
+  {
+    "timestamp": "2026-08-15T17:45:16",
+    "nome": "Kabum",
+    "url": "https://www.kabum.com.br/produto/989702/console-sony-playstation-5-ssd-825gb-controle-sem-fio-dualsense-2-jogos-digitais-edicao-digital",
+    "preco": 4091.07
+  },
+  {
+    "timestamp": "2026-08-15T17:45:17",
+    "nome": "Amazon",
+    "url": "https://www.amazon.com.br/dp/B0FPGF9J2J",
+    "preco": 1996.0
+  },
+  {
+    "timestamp": "2026-08-15T17:45:24",
+    "nome": "WebFones",
+    "url": "https://www.webfones.com.br/console-ps5-slim-digital-825gb-astro-bot-gran-turismo-7-sony/p",
+    "preco": 4599.0
+  },
+  {
+    "timestamp": "2026-08-15T17:45:26",
+    "nome": "Carrefour",
+    "url": "https://www.carrefour.com.br/produto/console-playstation-5-slim-digital-825gb-pacote-astro-bot-e-gran-turismo-7-336324399",
+    "preco": 4623.55
+  },
+  {
+    "timestamp": "2026-08-15T17:45:28",
+    "nome": "Americanas",
+    "url": "https://www.americanas.com.br/console-playstation-5-edicao-digital--825gb-%E2%80%93-astro-bot-4-e-gran-turismo-7/p",
+    "preco": 4599.99
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "rodada": "2026-08-15T14:39:53",
+  "rodada": "2026-08-15T17:45:16",
   "resultados": [
     {
       "nome": "Kabum",
@@ -7,15 +7,15 @@
       "preco": 4091.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-15T14:39:53"
+      "timestamp": "2026-08-15T17:45:16"
     },
     {
       "nome": "Amazon",
       "url": "https://www.amazon.com.br/dp/B0FPGF9J2J",
-      "preco": 4091.07,
+      "preco": 1996.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-15T14:39:55"
+      "timestamp": "2026-08-15T17:45:17"
     },
     {
       "nome": "WebFones",
@@ -23,7 +23,7 @@
       "preco": 4599.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-15T14:40:04"
+      "timestamp": "2026-08-15T17:45:24"
     },
     {
       "nome": "Carrefour",
@@ -31,7 +31,7 @@
       "preco": 4623.55,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-15T14:40:06"
+      "timestamp": "2026-08-15T17:45:26"
     },
     {
       "nome": "Americanas",
@@ -39,7 +39,7 @@
       "preco": 4599.99,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-15T14:40:08"
+      "timestamp": "2026-08-15T17:45:28"
     },
     {
       "nome": "Mercado Livre",
@@ -47,7 +47,7 @@
       "preco": null,
       "status": "erro",
       "mensagem": "HTTP 403",
-      "timestamp": "2026-08-15T14:40:10"
+      "timestamp": "2026-08-15T17:45:30"
     }
   ]
 }
