@@ -24,7 +24,7 @@ import json
 import re
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urljoin
 
@@ -243,6 +243,10 @@ def fetch_html_playwright(url: str) -> str | None:
         return None
 
 
+def now_iso():
+    return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+
+
 def new_result(nome, url):
     return {
         "nome": nome,
@@ -250,7 +254,7 @@ def new_result(nome, url):
         "preco": None,
         "status": "erro",
         "mensagem": "",
-        "timestamp": datetime.now().isoformat(timespec="seconds"),
+        "timestamp": now_iso(),
     }
 
 
@@ -392,7 +396,7 @@ def scrape_site(site) -> dict:
 def run_once():
     sites = load_sites()
     historico = load_json(HISTORICO_FILE, [])
-    rodada_ts = datetime.now().isoformat(timespec="seconds")
+    rodada_ts = now_iso()
 
     print(f"\n[{rodada_ts}] Buscando preços em {len(sites)} fonte(s)...")
 
