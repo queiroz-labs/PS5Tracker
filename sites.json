@@ -23,5 +23,15 @@
     "nome": "Americanas",
     "url": "https://www.americanas.com.br/console-playstation-5-edicao-digital--825gb-%E2%80%93-astro-bot-4-e-gran-turismo-7/p",
     "seletor": "jsonld"
+  },
+  {
+    "nome": "Zoom",
+    "tipo": "agregador",
+    "url": "https://www.zoom.com.br/search?q=playstation 5 slim digital"
+  },
+  {
+    "nome": "Buscapé",
+    "tipo": "agregador",
+    "url": "https://www.buscape.com.br/search?q=playstation 5 slim digital"
   }
 ]

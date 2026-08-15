@@ -28,6 +28,7 @@ import sys
 import time
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import urljoin
 
 try:
     import requests
@@ -258,6 +259,99 @@ def new_result(nome, url):
     }
 
 
+def normalize_store(name):
+    if not name:
+        return name
+    name = re.sub(r"^Via\s+", "", name)
+    name = name.strip().rstrip("!")
+    return re.sub(r"\s+", " ", name)
+
+
+def is_ps5_console(nome):
+    n = nome.lower()
+    excluidos = (
+        "portal", "jogo", "controle", "headset", "volante", "capa", "base",
+        "carregador", "suporte", "cabo", "hdmi", "pelicula", "película",
+        "grip", "stand", "acessorio", "acessório", "fone", "mouse", "teclado",
+        "case", "ssd externo", "flash", "pen drive", "pendrive", "cartão", "cartao",
+    )
+    for w in excluidos:
+        if w in n:
+            return False
+    if "playstation 5" in n or "playstation5" in n:
+        return True
+    if "ps5" in n and "console" in n:
+        return True
+    return False
+
+
+def scrape_agregador(site) -> list:
+    fonte = site.get("nome", "Agregador")
+    url_busca = site.get("url", "")
+    resultados = []
+
+    try:
+        html = fetch_html(url_busca)
+        soup = BeautifulSoup(html, "html.parser")
+        cards = soup.select('article[data-testid="product-card"]')
+
+        ofertas = {}
+        for card in cards:
+            nm = card.select_one('[data-testid="product-card::name"]')
+            pr = card.select_one('[data-testid="product-card::price"]')
+            if not nm or not pr:
+                continue
+            nome_produto = nm.get_text(" ", strip=True)
+            if not is_ps5_console(nome_produto):
+                continue
+            preco = parse_price(pr.get_text())
+            if preco is None:
+                continue
+
+            loja = None
+            best = card.select_one('[aria-label="Menor preço"]')
+            if best:
+                loja = normalize_store(best.get_text(" ", strip=True))
+            else:
+                merchant = card.select_one('[data-area="merchant"]')
+                if merchant:
+                    loja = normalize_store(merchant.get_text(" ", strip=True))
+            if not loja:
+                continue
+
+            link = card.select_one('a[href]')
+            url = urljoin(url_busca, link["href"]) if link else url_busca
+
+            if loja not in ofertas or preco < ofertas[loja]["preco"]:
+                ofertas[loja] = {"preco": preco, "url": url, "produto": nome_produto}
+
+        for loja, data in ofertas.items():
+            r = new_result(f"{loja} ({fonte})", data["url"])
+            r["preco"] = data["preco"]
+            r["status"] = "ok"
+            resultados.append(r)
+            print(f"  OK {loja} ({fonte}): R$ {data['preco']:,.2f}")
+
+        if not resultados:
+            r = new_result(fonte, url_busca)
+            r["mensagem"] = "Nenhum produto relevante encontrado"
+            r["status"] = "seletor_falhou"
+            resultados.append(r)
+    except requests.exceptions.Timeout:
+        r = new_result(fonte, url_busca)
+        r["mensagem"] = "Timeout"
+        resultados.append(r)
+    except Exception as e:
+        r = new_result(fonte, url_busca)
+        r["mensagem"] = str(e)[:140]
+        resultados.append(r)
+
+    if resultados and resultados[0]["status"] == "erro":
+        print(f"  ERRO {fonte}: {resultados[0]['mensagem']}")
+
+    return resultados
+
+
 def scrape_site(site) -> dict:
     nome = site.get("nome", "?")
     url  = site.get("url", "")
@@ -381,7 +475,10 @@ def run_once():
 
     resultados = []
     for site in sites:
-        resultados.append(scrape_site(site))
+        if site.get("tipo") == "agregador":
+            resultados.extend(scrape_agregador(site))
+        else:
+            resultados.append(scrape_site(site))
         time.sleep(1.5)
 
     if MERCADO_LIVRE_ENABLED:

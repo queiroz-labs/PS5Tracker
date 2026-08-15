@@ -114,7 +114,10 @@ main{max-width:980px;margin:0 auto;padding:28px 20px 60px;display:flex;flex-dire
   display:flex;align-items:center;gap:10px;
   padding:10px 14px;border-radius:7px;
   background:var(--surf);border:1px solid var(--brd);
+  text-decoration:none;color:inherit;cursor:pointer;
+  transition:border-color .15s, background .15s;
 }
+.loja-row:hover{border-color:var(--accent);background:var(--card)}
 .loja-name{font-weight:500;flex:1;font-size:13px}
 .loja-price{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;color:var(--text)}
 .loja-ts{font-size:11px;color:var(--muted);margin-top:2px}
@@ -403,12 +406,12 @@ function renderLojas(status) {
   pill.textContent = temErro ? 'parcial' : 'ok';
 
   el.innerHTML = status.resultados.map(r => `
-    <div class="loja-row">
+    <a class="loja-row" href="${r.url}" target="_blank" rel="noopener">
       <div class="dot ${r.status==='ok'?'dot-ok':'dot-err'}"></div>
       <div style="flex:1;min-width:0">
         <div style="display:flex;align-items:center;gap:8px">
           <span class="loja-name">${r.nome}</span>
-          <a class="loja-link" href="${r.url}" target="_blank">↗</a>
+          <span class="loja-link">↗</span>
         </div>
         ${r.status!=='ok' ? `<div class="loja-err-msg">${r.mensagem||'erro desconhecido'}</div>` : ''}
       </div>
@@ -416,7 +419,7 @@ function renderLojas(status) {
         <div class="loja-price">${r.preco!=null?fmt(r.preco):'—'}</div>
         <div class="loja-ts">${fmtDT(r.timestamp)}</div>
       </div>
-    </div>`).join('');
+    </a>`).join('');
 }
 
 // ── TABELA ────────────────────────────────────────────────────────
