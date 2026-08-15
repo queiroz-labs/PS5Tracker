@@ -179,12 +179,12 @@ def extract_price_from_text(soup):
     text = soup.get_text(" ", strip=True)
     if not text:
         return None
-    # Prefere valores precedidos por "R$" (evita confundir com contagens, datas etc.)
+    # Só aceita valores precedidos por "R$" (evita confundir com contagens, datas etc.)
     for m in re.finditer(r"R\$\s*([\d][\d.,]*\d)", text):
         p = parse_price(m.group(1))
         if p is not None and p >= 100:
             return p
-    return parse_price(text)
+    return None
 
 
 def price_from_soup(soup, selector, allow_text=False) -> float | None:
@@ -225,8 +225,19 @@ def fetch_html_playwright(url: str) -> str | None:
         return None
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
-            page = browser.new_page(user_agent=HEADERS["User-Agent"], locale="pt-BR")
+            browser = p.chromium.launch(
+                headless=True,
+                args=["--disable-blink-features=AutomationControlled"],
+            )
+            ctx = browser.new_context(
+                user_agent=HEADERS["User-Agent"],
+                locale="pt-BR",
+                viewport={"width": 1366, "height": 768},
+            )
+            ctx.add_init_script(
+                "Object.defineProperty(navigator,'webdriver',{get:()=>undefined});"
+            )
+            page = ctx.new_page()
             page.goto(url, timeout=30000, wait_until="domcontentloaded")
             page.wait_for_timeout(3000)
             html = page.content()
