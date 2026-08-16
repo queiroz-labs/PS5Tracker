@@ -1,5 +1,5 @@
 {
-  "rodada": "2026-08-16T01:16:53Z",
+  "rodada": "2026-08-16T12:38:27Z",
   "resultados": [
     {
       "nome": "Kabum",
@@ -7,7 +7,7 @@
       "preco": 4091.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T01:16:53Z"
+      "timestamp": "2026-08-16T12:38:27Z"
     },
     {
       "nome": "WebFones",
@@ -15,7 +15,7 @@
       "preco": 4599.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T01:16:55Z"
+      "timestamp": "2026-08-16T12:38:29Z"
     },
     {
       "nome": "Carrefour",
@@ -23,7 +23,7 @@
       "preco": 4623.55,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T01:16:59Z"
+      "timestamp": "2026-08-16T12:38:31Z"
     },
     {
       "nome": "Americanas",
@@ -31,39 +31,55 @@
       "preco": 4599.99,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T01:17:01Z"
+      "timestamp": "2026-08-16T12:38:36Z"
     },
     {
-      "nome": "Casas Bahia (Zoom)",
-      "url": "https://www.zoom.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k?_lc=88&experiencevariant=cro-12-1&searchterm=playstation%205%20slim%20digital",
-      "preco": 4089.0,
+      "nome": "Fast Shop (Zoom)",
+      "url": "https://www.zoom.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 3909.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T01:17:03Z"
-    },
-    {
-      "nome": "Magazine Luiza (Zoom)",
-      "url": "https://www.zoom.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k?_lc=88&experiencevariant=cro-12-1&searchterm=playstation%205%20slim%20digital",
-      "preco": 4031.04,
-      "status": "ok",
-      "mensagem": "",
-      "timestamp": "2026-08-16T01:17:03Z"
-    },
-    {
-      "nome": "KaBuM (Zoom)",
-      "url": "https://www.zoom.com.br/console-de-video-game/playstation-5-slim-1tb-bundle-astro-bot-gran-turismo-7?_lc=88&experiencevariant=cro-12-1&searchterm=playstation%205%20slim%20digital",
-      "preco": 4463.07,
-      "status": "ok",
-      "mensagem": "",
-      "timestamp": "2026-08-16T01:17:03Z"
+      "timestamp": "2026-08-16T12:38:39Z"
     },
     {
       "nome": "Amazon (Zoom)",
-      "url": "https://www.zoom.com.br/console-de-video-game/pre-venda-console-playstation-5-slim-1-tb-sony-1214a-4k?_lc=88&experiencevariant=cro-12-1&searchterm=playstation%205%20slim%20digital",
+      "url": "https://www.zoom.com.br/console-de-video-game/pre-venda-console-playstation-5-slim-1-tb-sony-1214a-4k?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
       "preco": 4199.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T01:17:03Z"
+      "timestamp": "2026-08-16T12:38:39Z"
+    },
+    {
+      "nome": "Magazine Luiza (Zoom)",
+      "url": "https://www.zoom.com.br/console-de-video-game/console-playstation-5-slim-1tb-sony-4k-hdr?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 4511.04,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-08-16T12:38:39Z"
+    },
+    {
+      "nome": "Casas Bahia (Zoom)",
+      "url": "https://www.zoom.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 4089.0,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-08-16T12:38:39Z"
+    },
+    {
+      "nome": "KaBuM (Zoom)",
+      "url": "https://www.zoom.com.br/console-de-video-game/playstation-5-slim-1tb-bundle-astro-bot-gran-turismo-7?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 4463.07,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-08-16T12:38:39Z"
+    },
+    {
+      "nome": "Extra (Zoom)",
+      "url": "https://www.zoom.com.br/lead?oid=1563288111&channel=86&index=2&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 4089.0,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-08-16T12:38:39Z"
     },
     {
       "nome": "Casas Bahia (Buscapé)",
@@ -71,15 +87,15 @@
       "preco": 4089.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T01:17:06Z"
+      "timestamp": "2026-08-16T12:38:42Z"
     },
     {
-      "nome": "Magazine Luiza (Buscapé)",
+      "nome": "Fast Shop (Buscapé)",
       "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k?_lc=88&searchterm=playstation%205%20slim%20digital",
-      "preco": 4031.04,
+      "preco": 3909.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T01:17:06Z"
+      "timestamp": "2026-08-16T12:38:42Z"
     },
     {
       "nome": "KaBuM (Buscapé)",
@@ -87,7 +103,7 @@
       "preco": 4463.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T01:17:06Z"
+      "timestamp": "2026-08-16T12:38:42Z"
     },
     {
       "nome": "Amazon (Buscapé)",
@@ -95,7 +111,15 @@
       "preco": 4199.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T01:17:06Z"
+      "timestamp": "2026-08-16T12:38:42Z"
+    },
+    {
+      "nome": "Magazine Luiza (Buscapé)",
+      "url": "https://www.buscape.com.br/lead?oid=1578144110&channel=86&index=11&searchterm=playstation%205%20slim%20digital",
+      "preco": 4589.1,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-08-16T12:38:42Z"
     }
   ]
 }
