@@ -1,5 +1,5 @@
 {
-  "rodada": "2026-08-16T12:38:27Z",
+  "rodada": "2026-08-17T01:15:05Z",
   "resultados": [
     {
       "nome": "Kabum",
@@ -7,7 +7,7 @@
       "preco": 4091.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:27Z"
+      "timestamp": "2026-08-17T01:15:05Z"
     },
     {
       "nome": "WebFones",
@@ -15,7 +15,7 @@
       "preco": 4599.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:29Z"
+      "timestamp": "2026-08-17T01:15:06Z"
     },
     {
       "nome": "Carrefour",
@@ -23,7 +23,7 @@
       "preco": 4623.55,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:31Z"
+      "timestamp": "2026-08-17T01:15:08Z"
     },
     {
       "nome": "Americanas",
@@ -31,7 +31,7 @@
       "preco": 4599.99,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:36Z"
+      "timestamp": "2026-08-17T01:15:10Z"
     },
     {
       "nome": "Fast Shop (Zoom)",
@@ -39,7 +39,7 @@
       "preco": 3909.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:39Z"
+      "timestamp": "2026-08-17T01:15:13Z"
     },
     {
       "nome": "Amazon (Zoom)",
@@ -47,7 +47,7 @@
       "preco": 4199.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:39Z"
+      "timestamp": "2026-08-17T01:15:13Z"
     },
     {
       "nome": "Magazine Luiza (Zoom)",
@@ -55,7 +55,7 @@
       "preco": 4511.04,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:39Z"
+      "timestamp": "2026-08-17T01:15:13Z"
     },
     {
       "nome": "Casas Bahia (Zoom)",
@@ -63,7 +63,7 @@
       "preco": 4089.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:39Z"
+      "timestamp": "2026-08-17T01:15:13Z"
     },
     {
       "nome": "KaBuM (Zoom)",
@@ -71,7 +71,7 @@
       "preco": 4463.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:39Z"
+      "timestamp": "2026-08-17T01:15:13Z"
     },
     {
       "nome": "Extra (Zoom)",
@@ -79,7 +79,7 @@
       "preco": 4089.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:39Z"
+      "timestamp": "2026-08-17T01:15:13Z"
     },
     {
       "nome": "Casas Bahia (Buscapé)",
@@ -87,15 +87,7 @@
       "preco": 4089.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:42Z"
-    },
-    {
-      "nome": "Fast Shop (Buscapé)",
-      "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k?_lc=88&searchterm=playstation%205%20slim%20digital",
-      "preco": 3909.0,
-      "status": "ok",
-      "mensagem": "",
-      "timestamp": "2026-08-16T12:38:42Z"
+      "timestamp": "2026-08-17T01:15:15Z"
     },
     {
       "nome": "KaBuM (Buscapé)",
@@ -103,7 +95,15 @@
       "preco": 4463.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:42Z"
+      "timestamp": "2026-08-17T01:15:15Z"
+    },
+    {
+      "nome": "Fast Shop (Buscapé)",
+      "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k?_lc=88&searchterm=playstation%205%20slim%20digital",
+      "preco": 3909.0,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-08-17T01:15:15Z"
     },
     {
       "nome": "Amazon (Buscapé)",
@@ -111,7 +111,7 @@
       "preco": 4199.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:42Z"
+      "timestamp": "2026-08-17T01:15:15Z"
     },
     {
       "nome": "Magazine Luiza (Buscapé)",
@@ -119,7 +119,7 @@
       "preco": 4589.1,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-16T12:38:42Z"
+      "timestamp": "2026-08-17T01:15:15Z"
     }
   ]
 }
