@@ -1,5 +1,5 @@
 {
-  "rodada": "2026-08-19T01:13:38Z",
+  "rodada": "2026-08-19T12:46:22Z",
   "resultados": [
     {
       "nome": "Kabum",
@@ -7,7 +7,7 @@
       "preco": 4091.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-19T01:13:38Z"
+      "timestamp": "2026-08-19T12:46:22Z"
     },
     {
       "nome": "WebFones",
@@ -15,7 +15,7 @@
       "preco": 4599.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-19T01:13:40Z"
+      "timestamp": "2026-08-19T12:46:24Z"
     },
     {
       "nome": "Carrefour",
@@ -23,7 +23,7 @@
       "preco": 4623.55,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-19T01:13:43Z"
+      "timestamp": "2026-08-19T12:46:26Z"
     },
     {
       "nome": "Americanas",
@@ -31,55 +31,55 @@
       "preco": 4599.99,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-19T01:13:46Z"
-    },
-    {
-      "nome": "Magazine Luiza (Zoom)",
-      "url": "https://www.zoom.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
-      "preco": 4295.62,
-      "status": "ok",
-      "mensagem": "",
-      "timestamp": "2026-08-19T01:13:48Z"
-    },
-    {
-      "nome": "Amazon (Zoom)",
-      "url": "https://www.zoom.com.br/console-de-video-game/pre-venda-console-playstation-5-slim-1-tb-sony-1214a-4k?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
-      "preco": 4199.9,
-      "status": "ok",
-      "mensagem": "",
-      "timestamp": "2026-08-19T01:13:48Z"
+      "timestamp": "2026-08-19T12:46:29Z"
     },
     {
       "nome": "KaBuM (Zoom)",
-      "url": "https://www.zoom.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "url": "https://www.zoom.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k?_lc=88&experiencevariant=cro-12-1&searchterm=playstation%205%20slim%20digital",
       "preco": 4091.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-19T01:13:48Z"
+      "timestamp": "2026-08-19T12:46:31Z"
     },
     {
-      "nome": "KaBuM (Buscapé)",
-      "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k?_lc=88&experiencevariant=cro-12-1&searchterm=playstation%205%20slim%20digital",
-      "preco": 4091.07,
+      "nome": "Magazine Luiza (Zoom)",
+      "url": "https://www.zoom.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k?_lc=88&experiencevariant=cro-12-1&searchterm=playstation%205%20slim%20digital",
+      "preco": 4031.04,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-19T01:13:51Z"
+      "timestamp": "2026-08-19T12:46:31Z"
     },
     {
-      "nome": "Magazine Luiza (Buscapé)",
-      "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k?_lc=88&experiencevariant=cro-12-1&searchterm=playstation%205%20slim%20digital",
-      "preco": 4295.62,
-      "status": "ok",
-      "mensagem": "",
-      "timestamp": "2026-08-19T01:13:51Z"
-    },
-    {
-      "nome": "Amazon (Buscapé)",
-      "url": "https://www.buscape.com.br/console-de-video-game/pre-venda-console-playstation-5-slim-1-tb-sony-1214a-4k?_lc=88&experiencevariant=cro-12-1&searchterm=playstation%205%20slim%20digital",
+      "nome": "Amazon (Zoom)",
+      "url": "https://www.zoom.com.br/console-de-video-game/pre-venda-console-playstation-5-slim-1-tb-sony-1214a-4k?_lc=88&experiencevariant=cro-12-1&searchterm=playstation%205%20slim%20digital",
       "preco": 4199.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-19T01:13:51Z"
+      "timestamp": "2026-08-19T12:46:31Z"
+    },
+    {
+      "nome": "Magazine Luiza (Buscapé)",
+      "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 4031.04,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-08-19T12:46:34Z"
+    },
+    {
+      "nome": "Amazon (Buscapé)",
+      "url": "https://www.buscape.com.br/console-de-video-game/pre-venda-console-playstation-5-slim-1-tb-sony-1214a-4k?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 4199.9,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-08-19T12:46:34Z"
+    },
+    {
+      "nome": "KaBuM (Buscapé)",
+      "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 4091.07,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-08-19T12:46:34Z"
     }
   ]
 }
