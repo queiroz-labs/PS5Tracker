@@ -1,5 +1,5 @@
 {
-  "rodada": "2026-08-28T09:52:53Z",
+  "rodada": "2026-08-28T21:46:44Z",
   "resultados": [
     {
       "nome": "Kabum",
@@ -7,7 +7,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-28T09:52:53Z"
+      "timestamp": "2026-08-28T21:46:44Z"
     },
     {
       "nome": "WebFones",
@@ -15,15 +15,15 @@
       "preco": 4599.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-28T09:52:59Z"
+      "timestamp": "2026-08-28T21:46:46Z"
     },
     {
       "nome": "Carrefour",
       "url": "https://www.carrefour.com.br/produto/console-playstation-5-slim-digital-825gb-pacote-astro-bot-e-gran-turismo-7-336324399",
-      "preco": 4631.47,
+      "preco": 4699.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-28T09:53:03Z"
+      "timestamp": "2026-08-28T21:46:48Z"
     },
     {
       "nome": "Americanas",
@@ -31,7 +31,7 @@
       "preco": 4599.99,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-28T09:53:05Z"
+      "timestamp": "2026-08-28T21:46:50Z"
     },
     {
       "nome": "Amazon (Zoom)",
@@ -39,7 +39,7 @@
       "preco": 4299.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-28T09:53:08Z"
+      "timestamp": "2026-08-28T21:46:53Z"
     },
     {
       "nome": "Magazine Luiza (Zoom)",
@@ -47,7 +47,7 @@
       "preco": 4231.91,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-28T09:53:08Z"
+      "timestamp": "2026-08-28T21:46:53Z"
     },
     {
       "nome": "KaBuM (Zoom)",
@@ -55,7 +55,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-28T09:53:08Z"
+      "timestamp": "2026-08-28T21:46:53Z"
     },
     {
       "nome": "KaBuM (Buscapé)",
@@ -63,7 +63,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-28T09:53:11Z"
+      "timestamp": "2026-08-28T21:46:56Z"
     },
     {
       "nome": "Amazon (Buscapé)",
@@ -71,7 +71,7 @@
       "preco": 4299.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-28T09:53:11Z"
+      "timestamp": "2026-08-28T21:46:56Z"
     },
     {
       "nome": "Magazine Luiza (Buscapé)",
@@ -79,7 +79,7 @@
       "preco": 4231.91,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-08-28T09:53:11Z"
+      "timestamp": "2026-08-28T21:46:56Z"
     }
   ]
 }
