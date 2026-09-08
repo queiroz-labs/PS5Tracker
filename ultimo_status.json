@@ -1,5 +1,5 @@
 {
-  "rodada": "2026-09-08T03:19:31Z",
+  "rodada": "2026-09-08T16:05:50Z",
   "resultados": [
     {
       "nome": "Kabum",
@@ -7,7 +7,7 @@
       "preco": 4091.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-08T03:19:31Z"
+      "timestamp": "2026-09-08T16:05:50Z"
     },
     {
       "nome": "WebFones",
@@ -15,15 +15,15 @@
       "preco": 4599.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-08T03:19:33Z"
+      "timestamp": "2026-09-08T16:05:52Z"
     },
     {
       "nome": "Carrefour",
       "url": "https://www.carrefour.com.br/produto/console-playstation-5-slim-digital-825gb-pacote-astro-bot-e-gran-turismo-7-336324399",
-      "preco": 4680.74,
+      "preco": 4699.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-08T03:19:36Z"
+      "timestamp": "2026-09-08T16:05:54Z"
     },
     {
       "nome": "Americanas",
@@ -31,7 +31,7 @@
       "preco": 4599.99,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-08T03:19:39Z"
+      "timestamp": "2026-09-08T16:05:57Z"
     },
     {
       "nome": "Amazon (Zoom)",
@@ -39,7 +39,7 @@
       "preco": 4250.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-08T03:19:42Z"
+      "timestamp": "2026-09-08T16:06:00Z"
     },
     {
       "nome": "Magazine Luiza (Zoom)",
@@ -47,7 +47,7 @@
       "preco": 4699.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-08T03:19:42Z"
+      "timestamp": "2026-09-08T16:06:00Z"
     },
     {
       "nome": "KaBuM (Zoom)",
@@ -55,7 +55,7 @@
       "preco": 4091.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-08T03:19:42Z"
+      "timestamp": "2026-09-08T16:06:00Z"
     },
     {
       "nome": "Amazon (Buscapé)",
@@ -63,7 +63,7 @@
       "preco": 4250.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-08T03:19:44Z"
+      "timestamp": "2026-09-08T16:06:03Z"
     },
     {
       "nome": "Magazine Luiza (Buscapé)",
@@ -71,7 +71,7 @@
       "preco": 4699.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-08T03:19:44Z"
+      "timestamp": "2026-09-08T16:06:03Z"
     },
     {
       "nome": "KaBuM (Buscapé)",
@@ -79,7 +79,7 @@
       "preco": 4091.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-08T03:19:44Z"
+      "timestamp": "2026-09-08T16:06:03Z"
     }
   ]
 }
