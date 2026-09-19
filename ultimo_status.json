@@ -1,5 +1,5 @@
 {
-  "rodada": "2026-09-19T03:24:40Z",
+  "rodada": "2026-09-19T15:27:43Z",
   "resultados": [
     {
       "nome": "Kabum",
@@ -7,7 +7,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-19T03:24:40Z"
+      "timestamp": "2026-09-19T15:27:43Z"
     },
     {
       "nome": "WebFones",
@@ -15,7 +15,7 @@
       "preco": 4599.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-19T03:24:42Z"
+      "timestamp": "2026-09-19T15:27:45Z"
     },
     {
       "nome": "Carrefour",
@@ -23,7 +23,7 @@
       "preco": 4583.23,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-19T03:24:45Z"
+      "timestamp": "2026-09-19T15:27:49Z"
     },
     {
       "nome": "Americanas",
@@ -31,7 +31,7 @@
       "preco": 4599.99,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-19T03:24:47Z"
+      "timestamp": "2026-09-19T15:27:52Z"
     },
     {
       "nome": "Amazon (Zoom)",
@@ -39,7 +39,7 @@
       "preco": 4299.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-19T03:24:49Z"
+      "timestamp": "2026-09-19T15:27:56Z"
     },
     {
       "nome": "Magazine Luiza (Zoom)",
@@ -47,7 +47,7 @@
       "preco": 5224.05,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-19T03:24:49Z"
+      "timestamp": "2026-09-19T15:27:56Z"
     },
     {
       "nome": "KaBuM (Zoom)",
@@ -55,7 +55,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-19T03:24:49Z"
+      "timestamp": "2026-09-19T15:27:56Z"
     },
     {
       "nome": "Amazon (Buscapé)",
@@ -63,7 +63,7 @@
       "preco": 4299.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-19T03:24:51Z"
+      "timestamp": "2026-09-19T15:27:58Z"
     },
     {
       "nome": "Magazine Luiza (Buscapé)",
@@ -71,7 +71,7 @@
       "preco": 5224.05,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-19T03:24:51Z"
+      "timestamp": "2026-09-19T15:27:58Z"
     },
     {
       "nome": "KaBuM (Buscapé)",
@@ -79,7 +79,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-19T03:24:51Z"
+      "timestamp": "2026-09-19T15:27:58Z"
     }
   ]
 }
