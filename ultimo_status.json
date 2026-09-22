@@ -1,5 +1,5 @@
 {
-  "rodada": "2026-09-22T03:35:19Z",
+  "rodada": "2026-09-22T16:23:30Z",
   "resultados": [
     {
       "nome": "Kabum",
@@ -7,7 +7,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-22T03:35:19Z"
+      "timestamp": "2026-09-22T16:23:30Z"
     },
     {
       "nome": "WebFones",
@@ -15,23 +15,23 @@
       "preco": 4599.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-22T03:35:21Z"
+      "timestamp": "2026-09-22T16:23:32Z"
     },
     {
       "nome": "Carrefour",
       "url": "https://www.carrefour.com.br/produto/console-playstation-5-slim-digital-825gb-pacote-astro-bot-e-gran-turismo-7-336324399",
-      "preco": 4583.23,
+      "preco": 4699.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-22T03:35:23Z"
+      "timestamp": "2026-09-22T16:23:34Z"
     },
     {
       "nome": "Americanas",
       "url": "https://www.americanas.com.br/console-playstation-5-edicao-digital--825gb-%E2%80%93-astro-bot-4-e-gran-turismo-7/p",
-      "preco": 4599.99,
+      "preco": 4699.99,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-22T03:35:26Z"
+      "timestamp": "2026-09-22T16:23:35Z"
     },
     {
       "nome": "Amazon (Zoom)",
@@ -39,7 +39,7 @@
       "preco": 4499.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-22T03:35:28Z"
+      "timestamp": "2026-09-22T16:23:38Z"
     },
     {
       "nome": "Magazine Luiza (Zoom)",
@@ -47,7 +47,7 @@
       "preco": 4399.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-22T03:35:28Z"
+      "timestamp": "2026-09-22T16:23:38Z"
     },
     {
       "nome": "KaBuM (Zoom)",
@@ -55,7 +55,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-22T03:35:28Z"
+      "timestamp": "2026-09-22T16:23:38Z"
     },
     {
       "nome": "Amazon (Buscapé)",
@@ -63,7 +63,7 @@
       "preco": 4499.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-22T03:35:30Z"
+      "timestamp": "2026-09-22T16:23:40Z"
     },
     {
       "nome": "Magazine Luiza (Buscapé)",
@@ -71,7 +71,7 @@
       "preco": 4399.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-22T03:35:30Z"
+      "timestamp": "2026-09-22T16:23:40Z"
     },
     {
       "nome": "KaBuM (Buscapé)",
@@ -79,7 +79,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-22T03:35:30Z"
+      "timestamp": "2026-09-22T16:23:40Z"
     }
   ]
 }
