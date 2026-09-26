@@ -1,5 +1,5 @@
 {
-  "rodada": "2026-09-26T03:49:10Z",
+  "rodada": "2026-09-26T15:54:40Z",
   "resultados": [
     {
       "nome": "Kabum",
@@ -7,7 +7,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:10Z"
+      "timestamp": "2026-09-26T15:54:40Z"
     },
     {
       "nome": "WebFones",
@@ -15,7 +15,7 @@
       "preco": 4599.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:12Z"
+      "timestamp": "2026-09-26T15:54:42Z"
     },
     {
       "nome": "Carrefour",
@@ -23,7 +23,7 @@
       "preco": 4299.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:14Z"
+      "timestamp": "2026-09-26T15:54:46Z"
     },
     {
       "nome": "Americanas",
@@ -31,7 +31,7 @@
       "preco": 4699.99,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:20Z"
+      "timestamp": "2026-09-26T15:54:48Z"
     },
     {
       "nome": "Amazon (Zoom)",
@@ -39,7 +39,7 @@
       "preco": 4449.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:23Z"
+      "timestamp": "2026-09-26T15:54:52Z"
     },
     {
       "nome": "Magazine Luiza (Zoom)",
@@ -47,7 +47,7 @@
       "preco": 5403.85,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:23Z"
+      "timestamp": "2026-09-26T15:54:52Z"
     },
     {
       "nome": "KaBuM (Zoom)",
@@ -55,7 +55,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:23Z"
+      "timestamp": "2026-09-26T15:54:52Z"
     },
     {
       "nome": "Fast Shop (Zoom)",
@@ -63,7 +63,7 @@
       "preco": 6499.71,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:23Z"
+      "timestamp": "2026-09-26T15:54:52Z"
     },
     {
       "nome": "Amazon (Buscapé)",
@@ -71,7 +71,7 @@
       "preco": 4449.0,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:26Z"
+      "timestamp": "2026-09-26T15:54:55Z"
     },
     {
       "nome": "Magazine Luiza (Buscapé)",
@@ -79,7 +79,7 @@
       "preco": 5403.85,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:26Z"
+      "timestamp": "2026-09-26T15:54:55Z"
     },
     {
       "nome": "KaBuM (Buscapé)",
@@ -87,7 +87,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:26Z"
+      "timestamp": "2026-09-26T15:54:55Z"
     },
     {
       "nome": "Fast Shop (Buscapé)",
@@ -95,7 +95,7 @@
       "preco": 6499.71,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-09-26T03:49:26Z"
+      "timestamp": "2026-09-26T15:54:55Z"
     }
   ]
 }
