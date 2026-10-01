@@ -1,5 +1,5 @@
 {
-  "rodada": "2026-10-01T04:28:04Z",
+  "rodada": "2026-10-01T18:06:53Z",
   "resultados": [
     {
       "nome": "Kabum",
@@ -7,7 +7,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-01T04:28:04Z"
+      "timestamp": "2026-10-01T18:06:53Z"
     },
     {
       "nome": "WebFones",
@@ -15,7 +15,7 @@
       "preco": null,
       "status": "seletor_falhou",
       "mensagem": "Preço não encontrado (cascata de extração esgotada)",
-      "timestamp": "2026-10-01T04:28:06Z"
+      "timestamp": "2026-10-01T18:06:55Z"
     },
     {
       "nome": "Carrefour",
@@ -23,15 +23,15 @@
       "preco": 4599.89,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-01T04:28:15Z"
+      "timestamp": "2026-10-01T18:07:03Z"
     },
     {
       "nome": "Americanas",
       "url": "https://www.americanas.com.br/console-playstation-5-edicao-digital--825gb-%E2%80%93-astro-bot-4-e-gran-turismo-7/p",
-      "preco": 4699.99,
+      "preco": 4599.99,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-01T04:28:18Z"
+      "timestamp": "2026-10-01T18:07:05Z"
     },
     {
       "nome": "Amazon (Zoom)",
@@ -39,15 +39,7 @@
       "preco": 4299.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-01T04:28:25Z"
-    },
-    {
-      "nome": "Magazine Luiza (Zoom)",
-      "url": "https://www.zoom.com.br/lead?oid=1578144110&channel=86&index=3&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
-      "preco": 5224.05,
-      "status": "ok",
-      "mensagem": "",
-      "timestamp": "2026-10-01T04:28:25Z"
+      "timestamp": "2026-10-01T18:07:07Z"
     },
     {
       "nome": "KaBuM (Zoom)",
@@ -55,7 +47,15 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-01T04:28:25Z"
+      "timestamp": "2026-10-01T18:07:07Z"
+    },
+    {
+      "nome": "Magazine Luiza (Zoom)",
+      "url": "https://www.zoom.com.br/lead?oid=1578144110&channel=86&index=2&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 5224.05,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-10-01T18:07:07Z"
     },
     {
       "nome": "Amazon (Buscapé)",
@@ -63,15 +63,7 @@
       "preco": 4299.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-01T04:28:30Z"
-    },
-    {
-      "nome": "Magazine Luiza (Buscapé)",
-      "url": "https://www.buscape.com.br/lead?oid=1578144110&channel=86&index=3&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
-      "preco": 5224.05,
-      "status": "ok",
-      "mensagem": "",
-      "timestamp": "2026-10-01T04:28:30Z"
+      "timestamp": "2026-10-01T18:07:10Z"
     },
     {
       "nome": "KaBuM (Buscapé)",
@@ -79,7 +71,15 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-01T04:28:30Z"
+      "timestamp": "2026-10-01T18:07:10Z"
+    },
+    {
+      "nome": "Magazine Luiza (Buscapé)",
+      "url": "https://www.buscape.com.br/lead?oid=1578144110&channel=86&index=2&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 5224.05,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-10-01T18:07:10Z"
     }
   ]
 }
