@@ -1,5 +1,5 @@
 {
-  "rodada": "2026-10-02T17:32:51Z",
+  "rodada": "2026-10-03T04:02:37Z",
   "resultados": [
     {
       "nome": "Kabum",
@@ -7,7 +7,7 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-02T17:32:51Z"
+      "timestamp": "2026-10-03T04:02:37Z"
     },
     {
       "nome": "WebFones",
@@ -15,7 +15,7 @@
       "preco": null,
       "status": "seletor_falhou",
       "mensagem": "Preço não encontrado (cascata de extração esgotada)",
-      "timestamp": "2026-10-02T17:32:53Z"
+      "timestamp": "2026-10-03T04:02:40Z"
     },
     {
       "nome": "Carrefour",
@@ -23,7 +23,7 @@
       "preco": 4599.89,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-02T17:33:00Z"
+      "timestamp": "2026-10-03T04:02:47Z"
     },
     {
       "nome": "Americanas",
@@ -31,7 +31,7 @@
       "preco": 4599.99,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-02T17:33:02Z"
+      "timestamp": "2026-10-03T04:02:49Z"
     },
     {
       "nome": "Amazon (Zoom)",
@@ -39,7 +39,7 @@
       "preco": 4299.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-02T17:33:04Z"
+      "timestamp": "2026-10-03T04:02:52Z"
     },
     {
       "nome": "KaBuM (Zoom)",
@@ -47,7 +47,15 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-02T17:33:04Z"
+      "timestamp": "2026-10-03T04:02:52Z"
+    },
+    {
+      "nome": "Fast Shop (Zoom)",
+      "url": "https://www.zoom.com.br/console-de-video-game/console-playstation-5-slim-edicao-digital-1tb-bundle-returnal-ratchet-clank?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 6499.71,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-10-03T04:02:52Z"
     },
     {
       "nome": "Magazine Luiza (Zoom)",
@@ -55,7 +63,7 @@
       "preco": 5224.05,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-02T17:33:04Z"
+      "timestamp": "2026-10-03T04:02:52Z"
     },
     {
       "nome": "Amazon (Buscapé)",
@@ -63,7 +71,7 @@
       "preco": 4299.9,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-02T17:33:06Z"
+      "timestamp": "2026-10-03T04:02:54Z"
     },
     {
       "nome": "KaBuM (Buscapé)",
@@ -71,7 +79,15 @@
       "preco": 4184.07,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-02T17:33:06Z"
+      "timestamp": "2026-10-03T04:02:54Z"
+    },
+    {
+      "nome": "Fast Shop (Buscapé)",
+      "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-edicao-digital-1tb-bundle-returnal-ratchet-clank?_lc=88&experiencevariant=cro-12-2&searchterm=playstation%205%20slim%20digital",
+      "preco": 6499.71,
+      "status": "ok",
+      "mensagem": "",
+      "timestamp": "2026-10-03T04:02:54Z"
     },
     {
       "nome": "Magazine Luiza (Buscapé)",
@@ -79,7 +95,7 @@
       "preco": 5224.05,
       "status": "ok",
       "mensagem": "",
-      "timestamp": "2026-10-02T17:33:06Z"
+      "timestamp": "2026-10-03T04:02:54Z"
     }
   ]
 }
